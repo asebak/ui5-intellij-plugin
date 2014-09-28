@@ -1,5 +1,6 @@
 package ProjectBuilder;
 
+import Autogeneration.Index;
 import Autogeneration.UI5Library;
 import Autogeneration.UI5View;
 import Util.UI5Icons;
@@ -39,7 +40,7 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
 
 
     @Override
-    public void generateProject(@NotNull Project project, @NotNull final VirtualFile virtualFile, @NotNull UI5ProjectSettings ui5ProjectSettings, @NotNull Module module) {
+    public void generateProject(@NotNull Project project, @NotNull final VirtualFile virtualFile, @NotNull final UI5ProjectSettings ui5ProjectSettings, @NotNull Module module) {
         try {
 
             ProgressManager.getInstance().runProcessWithProgressSynchronously(new Runnable() {
@@ -50,6 +51,11 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
                         indicator.setText("Creating OpenUI5 Project");
                         File tempProject = createTemp();
                         //TODO: add Files to tempProject folder tempProject.getPath()
+                        Autogeneration.Index index = new Index();
+                        String indexHtml = index.createIndexCode(ui5ProjectSettings.getUi5Library(),
+                                virtualFile.getNameWithoutExtension().toLowerCase(),
+                                ui5ProjectSettings.getUi5View().getExtension());
+                        String mainView = ui5ProjectSettings.getUi5View().autogenerateCode();
                         File[] files = tempProject.listFiles();
                         assert files != null && files.length != 0;
                         File from = ContainerUtil.getFirstItem(ContainerUtil.newArrayList(files));

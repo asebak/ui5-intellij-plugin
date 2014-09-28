@@ -3,7 +3,7 @@ package Autogeneration;
 /**
  * Created by asebak on 9/28/2014.
  */
-public class HTMLView implements UI5View {
+public class HTMLView extends View implements UI5View {
     @Override
     public String getExtension() {
         return "html";
