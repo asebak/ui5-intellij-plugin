@@ -5,5 +5,5 @@ package Autogeneration;
  */
 public interface UI5View {
      String getExtension();
-     String autogenerateCode();
+     String autogenerateCode(UI5Library ui5Library, String controllerPath);
 }

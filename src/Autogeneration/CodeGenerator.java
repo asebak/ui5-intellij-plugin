@@ -2,6 +2,7 @@ package Autogeneration;
 
 /**
  * Created by asebak on 9/28/2014.
+ * Uses String Builder instead of t4 like in vs
  */
 class CodeGenerator {
     private StringBuilder sb;

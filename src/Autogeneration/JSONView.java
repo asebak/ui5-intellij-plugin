@@ -10,7 +10,8 @@ public class JSONView extends View implements UI5View {
     }
 
     @Override
-    public String autogenerateCode() {
-        return null;
+    public String autogenerateCode(UI5Library ui5Library, String controllerPath) {
+        return codeGenerator.createJsonViewCode(ui5Library, controllerPath);
     }
+
 }

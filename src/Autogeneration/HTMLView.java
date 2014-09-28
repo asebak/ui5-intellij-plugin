@@ -10,7 +10,8 @@ public class HTMLView extends View implements UI5View {
     }
 
     @Override
-    public String autogenerateCode() {
-        return null;
+    public String autogenerateCode(UI5Library ui5Library, String controllerPath) {
+        return codeGenerator.createHtmlViewCode(ui5Library, controllerPath);
     }
+
 }

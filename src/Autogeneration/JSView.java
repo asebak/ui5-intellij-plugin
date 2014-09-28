@@ -10,7 +10,8 @@ public class JSView extends View implements UI5View {
     }
 
     @Override
-    public String autogenerateCode() {
-        return null;
+    public String autogenerateCode(UI5Library ui5Library, String controllerPath) {
+        return codeGenerator.createJavascriptViewCode(ui5Library, controllerPath);
     }
+
 }

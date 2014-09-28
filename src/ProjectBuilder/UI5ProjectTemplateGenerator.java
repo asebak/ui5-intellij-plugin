@@ -55,7 +55,7 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
                         String indexHtml = index.createIndexCode(ui5ProjectSettings.getUi5Library(),
                                 virtualFile.getNameWithoutExtension().toLowerCase(),
                                 ui5ProjectSettings.getUi5View().getExtension());
-                        String mainView = ui5ProjectSettings.getUi5View().autogenerateCode();
+                        String mainView = ui5ProjectSettings.getUi5View().autogenerateCode(ui5ProjectSettings.getUi5Library(), "");
                         File[] files = tempProject.listFiles();
                         assert files != null && files.length != 0;
                         File from = ContainerUtil.getFirstItem(ContainerUtil.newArrayList(files));
