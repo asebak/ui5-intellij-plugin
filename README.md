@@ -1,4 +1,4 @@
-UI5-IntelliJ-Plugin
-===================
-
-OpenUI5 Platform Plugin for Intellij
+![alt tag](http://sap.github.io/openui5/images/OpenUI5_new_big_side.png)
+======
+## Extension Overview
+This unofficial extension allows you to create basic sap ui5 applications that will run with Intellij platform rather than eclipse.
