@@ -1,5 +1,6 @@
 package ProjectBuilder;
 
+import Autogeneration.*;
 import com.intellij.ide.util.projectWizard.SettingsStep;
 import com.intellij.openapi.ui.ValidationInfo;
 import com.intellij.platform.WebProjectGenerator;
@@ -9,6 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Enumeration;
 
 /**
  * Created by asebak on 9/27/2014.
@@ -46,7 +48,8 @@ public class UI5ProjectPeer implements WebProjectGenerator.GeneratorPeer<UI5Proj
         //Default Selection
         desktopTypeButton.setSelected(true);
         jsViewButton.setSelected(true);
-        //Button Groups to Handle Logic Selection
+
+        //JPanel Add Views
         applicationTypeGroup.add(desktopTypeButton);
         applicationTypeGroup.add(mobileTypeButton);
         viewTypeButtonGroup.add(htmlViewButton);
@@ -54,7 +57,7 @@ public class UI5ProjectPeer implements WebProjectGenerator.GeneratorPeer<UI5Proj
         viewTypeButtonGroup.add(jsViewButton);
         viewTypeButtonGroup.add(xmlViewButton);
 
-        //JPanel Add Views
+        //Button Groups to Handle Logic Selection
         applicationTypeButtonGroup.add(desktopTypeButton);
         applicationTypeButtonGroup.add(mobileTypeButton);
         viewTypeGroup.add(jsViewButton);
@@ -68,6 +71,30 @@ public class UI5ProjectPeer implements WebProjectGenerator.GeneratorPeer<UI5Proj
     @Override
     public UI5ProjectTemplateGenerator.UI5ProjectSettings getSettings() {
         UI5ProjectTemplateGenerator.UI5ProjectSettings settings = new UI5ProjectTemplateGenerator.UI5ProjectSettings();
+        UI5Library ui5Library = null;
+        UI5View ui5View = null;
+        String appType = getSelectedButton(applicationTypeButtonGroup);
+        String viewType = getSelectedButton(viewTypeButtonGroup);
+        if(appType == "Desktop"){
+            ui5Library = UI5Library.Desktop;
+        }
+        else if(appType == "Mobile"){
+            ui5Library = UI5Library.Mobile;
+        }
+        if(viewType == "Javascript"){
+            ui5View = new JSView();
+        }
+        else if(viewType == "HTML"){
+            ui5View = new HTMLView();
+        }
+        else if(viewType == "XML"){
+            ui5View = new XMLView();
+        }
+        else if(viewType == "JSON"){
+            ui5View = new JSONView();
+        }
+        settings.setUi5Library(ui5Library);
+        settings.setUi5View(ui5View);
         return settings;
     }
 
@@ -85,5 +112,17 @@ public class UI5ProjectPeer implements WebProjectGenerator.GeneratorPeer<UI5Proj
     @Override
     public void addSettingsStateListener(@NotNull WebProjectGenerator.SettingsStateListener settingsStateListener) {
         stateListeners.add(settingsStateListener);
+    }
+
+    public String getSelectedButton(ButtonGroup buttonGroup) {
+        for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
+            AbstractButton button = buttons.nextElement();
+
+            if (button.isSelected()) {
+                return button.getText();
+            }
+        }
+
+        return null;
     }
 }

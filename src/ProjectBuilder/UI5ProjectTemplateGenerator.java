@@ -1,5 +1,7 @@
 package ProjectBuilder;
 
+import Autogeneration.UI5Library;
+import Autogeneration.UI5View;
 import Util.UI5Icons;
 import com.intellij.ide.util.projectWizard.WebProjectTemplate;
 import com.intellij.openapi.application.ApplicationManager;
@@ -64,19 +66,22 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
     }
 
     final static class UI5ProjectSettings {
-        private String name = "example";
-        private String executable;
-
-        public void setExecutable(String executable) {
-            this.executable = executable;
+        private UI5View  ui5View;
+        private UI5Library ui5Library;
+        public UI5View getUi5View() {
+            return ui5View;
         }
 
-        public String getExecutable() {
-            return executable;
+        public void setUi5View(UI5View ui5View) {
+            this.ui5View = ui5View;
         }
 
-        public String name() {
-            return name;
+        public UI5Library getUi5Library() {
+            return ui5Library;
+        }
+
+        public void setUi5Library(UI5Library ui5Library) {
+            this.ui5Library = ui5Library;
         }
     }
 }
