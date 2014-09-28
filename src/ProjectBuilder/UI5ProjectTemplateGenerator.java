@@ -1,21 +1,16 @@
 package ProjectBuilder;
 
 import Util.UI5Icons;
-import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.ide.util.projectWizard.WebProjectTemplate;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.util.containers.ContainerUtil;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
-import java.io.File;
 
 /**
  * Created by asebak on 9/27/2014.
@@ -26,7 +21,7 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
     @NotNull
     @Override
     public String getName() {
-        return "OpenUI5 App";
+        return "App";
     }
 
     @Override
@@ -59,7 +54,7 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
 
     @Override
     public Icon getIcon() {
-        return UI5Icons.getIcon("/Icons/ui5.png");
+        return UI5Icons.getIcon();
     }
 
     @NotNull

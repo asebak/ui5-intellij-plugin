@@ -18,8 +18,7 @@
 
 
     <extensions defaultExtensionNs="com.intellij">
-        <configurationType
-                implementation="Runner.UI5ConfigurationType"/>
+        <configurationType implementation="Runner.UI5ConfigurationType"/>
         <applicationService serviceInterface="Config.UI5Settings"
                             serviceImplementation="Config.UI5Settings"/>
         <directoryProjectGenerator implementation="ProjectBuilder.UI5ProjectTemplateGenerator"/>

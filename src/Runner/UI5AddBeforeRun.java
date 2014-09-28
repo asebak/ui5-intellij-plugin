@@ -34,7 +34,7 @@ public class UI5AddBeforeRun extends BeforeRunTaskProvider<UI5AddBeforeRun.UI5Ad
 
     @Override
     public Icon getIcon() {
-        return UI5Icons.getIcon("/Icons/ui5.png");
+        return UI5Icons.getIcon();
     }
 
     @Override
