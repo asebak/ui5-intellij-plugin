@@ -10,6 +10,7 @@ import javax.swing.*;
 
 /**
  * Created by asebak on 9/27/2014.
+ * This creates the Main division for the Project Template the getGroups() is the Root level of the template
  */
 public class UI5TemplatesFactory extends ProjectTemplatesFactory {
     @NotNull
