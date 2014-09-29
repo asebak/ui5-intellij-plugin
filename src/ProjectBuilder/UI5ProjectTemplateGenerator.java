@@ -53,23 +53,33 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
                         ProgressIndicator indicator = ProgressManager.getInstance().getProgressIndicator();
                         indicator.setText("Creating OpenUI5 Project");
                         File tempProject = createTemp();
+
+
+
                         Autogeneration.Index index = new Index();
                         String ext = settings.getUi5View().getExtension();
-                        String rootName = virtualFile.getNameWithoutExtension().toLowerCase();
+                        String rootName = virtualFile.getNameWithoutExtension().toLowerCase().replace(" ", "");
                         String indexHtml = index.createIndexCode(settings.getUi5Library(),
                                 rootName,
                                 ext);
 
                         String mainView = settings.getUi5View().autogenerateCode(settings.getUi5Library(),
                                 rootName + ".Main");
+
+                        File i18n = new File (tempProject,"i18n");
+                        File css = new File (tempProject, "css");
+                        File rootFolder = new File (tempProject, rootName);
+                        i18n.mkdir();
+                        css.mkdir();
+                        rootFolder.mkdir();
                         String mainController = Controller.getAutogenerateCode(rootName, "Main");
-
                         File tempIndex = Files.createTempFile(tempProject.toPath(), "Index", ".html").toFile();
-                        File tempView = Files.createTempFile(tempProject.toPath(),"Main.view", "." +
+                        File tempView = Files.createTempFile(rootFolder.toPath(),"Main.view", "." +
                                 ext).toFile();
-                        File tempController = Files.createTempFile(tempProject.toPath(),"Main.controller", "."
+                        File tempController = Files.createTempFile(rootFolder.toPath(),"Main.controller", "."
                                 + ext).toFile();
-
+                        Files.createTempFile(css.toPath(), rootName, ".css");
+                        Files.createTempFile(i18n.toPath(), "18n", ".properties");
                         writeToFile(tempIndex, indexHtml);
                         writeToFile(tempView, mainView);
                         writeToFile(tempController, mainController);
@@ -89,9 +99,7 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
             ApplicationManager.getApplication().runWriteAction(new Runnable() {
                 @Override
                 public void run() {
-//                    PropertiesComponent propertiesComponent = PropertiesComponent.getInstance(project);
-//                    propertiesComponent.setValue(PhoneGapSettings.PHONEGAP_WORK_DIRECTORY, project.getBasePath());
-//                    virtualFile.refresh(false, true);
+
                 }
             });
         }

@@ -9,24 +9,24 @@ class CodeGenerator {
     public String createControllerCode(String modulePath, String controllerName){
         String root = modulePath + "." + controllerName;
         sb = new StringBuilder("sap.ui.controller('");
-        sb.append(root).append("', {").append("    /**\n" +
+        sb.append(root).append("', {").append("    \n/**\n" +
                 "    * Called when a controller is instantiated and its View controls (if available) are already created.\n" +
                 "    * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.\n" +
-                "    * @memberOf ").append(root).append("    onInit: function() {\n" +
+                "    * @memberOf ").append(root).append(" **/  \n onInit: function() {\n" +
                 "\n" +
                 "    },").append("    /**\n" +
                 "    * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered\n" +
                 "    * (NOT before the first rendering! onInit() is used for that one!).\n" +
-                "    * @memberOf ").append(root).append("    onBeforeRendering: function() {\n" +
+                "    * @memberOf ").append(root).append(" **/  \n   onBeforeRendering: function() {\n" +
                 "\n" +
                 "    },\n").append("    /**\n" +
                 "    * Called when the View has been rendered (so its HTML is part of the document). Post-rendering manipulations of the HTML could be done here.\n" +
                 "    * This hook is the same one that SAPUI5 controls get after being rendered.\n" +
-                "    * @memberOf ").append(root).append("    onAfterRendering: function() {\n" +
+                "    * @memberOf ").append(root).append(" **/  \n   onAfterRendering: function() {\n" +
                 "\n" +
                 "    },").append("    /**\n" +
                 "    * Called when the Controller is destroyed. Use this one to free resources and finalize activities.\n" +
-                "    * @memberOf ").append(root).append("    onExit: function() {\n" +
+                "    * @memberOf ").append(root).append("  **/  \n  onExit: function() {\n" +
                 "\n" +
                 "    }\n" +
                 "\n" +
@@ -52,7 +52,7 @@ class CodeGenerator {
                         "\t\t\t\tsap.ui.localResources(\"").append(rootModuleName).append("\");\n")
                         .append("\t\t\t\tsap.ui.localResources(\"util\");\n" +
                         "\t\t\t\tsap.ui.localResources(\"i18n\");\n" +
-                        "\t\t\t\tvar view = sap.ui.view({viewName:\"").append(rootModuleName).append(".Main'")
+                        "\t\t\t\tvar view = sap.ui.view({viewName:\"").append(rootModuleName).append(".Main\"")
                         .append(", type:sap.ui.core.mvc.ViewType.").append(intialViewExt).append("});\n" +
                         "\t\t\t\tview.placeAt(\"content\");\n" +
                         "\t\t</script>");
@@ -103,16 +103,16 @@ class CodeGenerator {
 
     public String createJavascriptViewCode(UI5Library ui5Library, String controllerPath){
         sb = new StringBuilder();
-        sb.append("sap.ui.jsview(\"'").append(controllerPath).append("', {")
-                .append("/** Specifies the Controller belonging to this View. \n" +
+        sb.append("sap.ui.jsview(\"").append(controllerPath).append("\", {")
+                .append("\n/** Specifies the Controller belonging to this View. \n" +
                         "\t* In the case that it is not implemented, or that \"null\" is returned, this View does not have a Controller.\n" +
                         "\t* @memberOf ").append(controllerPath)
-                .append("\tgetControllerName : function() {\n" +
+                .append("**/ \n\tgetControllerName : function() {\n" +
                         "\t\treturn '").append(controllerPath).append("';").append("\t},")
-                .append("/** Is initially called once after the Controller has been instantiated. It is the place where the UI is constructed. \n" +
+                .append("\n/** Is initially called once after the Controller has been instantiated. It is the place where the UI is constructed. \n" +
                         "\t* Since the Controller is given to this method, its event handlers can be attached right away. \n" +
                         "\t* @memberOf ").append(controllerPath)
-                .append("\tcreateContent : function(oController) {");
+                .append("**/ \n \tcreateContent : function(oController) {");
         switch (ui5Library){
             case Desktop:
                 break;
