@@ -49,10 +49,10 @@ class CodeGenerator {
                         "\t\t\t\tdata-sap-ui-theme=\"sap_bluecrystal\">\n" +
                         "\t\t</script>");
                 sb.append("\t\t<script>\n" +
-                        "\t\t\t\tsap.ui.localResources(\"<#= controllerName #>\");\n" +
-                        "\t\t\t\tsap.ui.localResources(\"util\");\n" +
+                        "\t\t\t\tsap.ui.localResources(\"").append(rootModuleName).append("\");\n")
+                        .append("\t\t\t\tsap.ui.localResources(\"util\");\n" +
                         "\t\t\t\tsap.ui.localResources(\"i18n\");\n" +
-                        "\t\t\t\tvar view = sap.ui.view({viewName:\"").append(rootModuleName).append(".Main")
+                        "\t\t\t\tvar view = sap.ui.view({viewName:\"").append(rootModuleName).append(".Main'")
                         .append(", type:sap.ui.core.mvc.ViewType.").append(intialViewExt).append("});\n" +
                         "\t\t\t\tview.placeAt(\"content\");\n" +
                         "\t\t</script>");

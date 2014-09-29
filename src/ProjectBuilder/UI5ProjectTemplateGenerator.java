@@ -1,5 +1,6 @@
 package ProjectBuilder;
 
+import Autogeneration.Controller;
 import Autogeneration.Index;
 import Autogeneration.UI5Library;
 import Autogeneration.UI5View;
@@ -12,13 +13,15 @@ import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.util.containers.ContainerUtil;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 
 /**
  * Created by asebak on 9/27/2014.
@@ -40,7 +43,7 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
 
 
     @Override
-    public void generateProject(@NotNull Project project, @NotNull final VirtualFile virtualFile, @NotNull final UI5ProjectSettings ui5ProjectSettings, @NotNull Module module) {
+    public void generateProject(@NotNull Project project, @NotNull final VirtualFile virtualFile, @NotNull final UI5ProjectSettings settings, @NotNull Module module) {
         try {
 
             ProgressManager.getInstance().runProcessWithProgressSynchronously(new Runnable() {
@@ -50,17 +53,31 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
                         ProgressIndicator indicator = ProgressManager.getInstance().getProgressIndicator();
                         indicator.setText("Creating OpenUI5 Project");
                         File tempProject = createTemp();
-                        //TODO: add Files to tempProject folder tempProject.getPath()
                         Autogeneration.Index index = new Index();
-                        String indexHtml = index.createIndexCode(ui5ProjectSettings.getUi5Library(),
-                                virtualFile.getNameWithoutExtension().toLowerCase(),
-                                ui5ProjectSettings.getUi5View().getExtension());
-                        String mainView = ui5ProjectSettings.getUi5View().autogenerateCode(ui5ProjectSettings.getUi5Library(), "");
+                        String ext = settings.getUi5View().getExtension();
+                        String rootName = virtualFile.getNameWithoutExtension().toLowerCase();
+                        String indexHtml = index.createIndexCode(settings.getUi5Library(),
+                                rootName,
+                                ext);
+
+                        String mainView = settings.getUi5View().autogenerateCode(settings.getUi5Library(),
+                                rootName + ".Main");
+                        String mainController = Controller.getAutogenerateCode(rootName, "Main");
+
+                        File tempIndex = Files.createTempFile(tempProject.toPath(), "Index", ".html").toFile();
+                        File tempView = Files.createTempFile(tempProject.toPath(),"Main.view", "." +
+                                ext).toFile();
+                        File tempController = Files.createTempFile(tempProject.toPath(),"Main.controller", "."
+                                + ext).toFile();
+
+                        writeToFile(tempIndex, indexHtml);
+                        writeToFile(tempView, mainView);
+                        writeToFile(tempController, mainController);
+
+
                         File[] files = tempProject.listFiles();
                         assert files != null && files.length != 0;
-                        File from = ContainerUtil.getFirstItem(ContainerUtil.newArrayList(files));
-                        assert from != null;
-                        FileUtil.copyDir(from, new File(virtualFile.getPath()));
+                        FileUtil.copyDir(tempProject, new File(virtualFile.getPath()));
                         deleteTemp(tempProject);
                     }
                     catch (Exception e) {
@@ -82,11 +99,25 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
         }
     }
 
-    protected File createTemp() throws IOException {
+    private void forceRename(File source, File target) throws IOException
+    {
+        if (target.exists()){
+            target.delete();
+        }
+        source.renameTo(target);
+    }
+
+    private void writeToFile(File file, String content) throws IOException{
+        BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+        bw.write(content);
+        bw.close();
+    }
+
+    private File createTemp() throws IOException {
         return FileUtil.createTempDirectory("ui5-generated-project", null, false);
     }
 
-    protected void deleteTemp(File tempProject) {
+    private void deleteTemp(File tempProject) {
         FileUtil.delete(tempProject);
     }
 
