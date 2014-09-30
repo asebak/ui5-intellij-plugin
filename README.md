@@ -2,5 +2,3 @@
 ======
 ## Extension Overview
 This unofficial extension allows you to create basic sap ui5 applications that will run with Intellij platform rather than eclipse.
-
-

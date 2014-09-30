@@ -21,7 +21,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
 
 /**
  * Created by asebak on 9/27/2014.
@@ -73,16 +72,16 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
                         css.mkdir();
                         rootFolder.mkdir();
                         String mainController = Controller.getAutogenerateCode(rootName, "Main");
-                        File tempIndex = Files.createTempFile(tempProject.toPath(), "Index", ".html").toFile();
-                        File tempView = Files.createTempFile(rootFolder.toPath(),"Main.view", "." +
-                                ext).toFile();
-                        File tempController = Files.createTempFile(rootFolder.toPath(),"Main.controller", "."
-                                + ext).toFile();
-                        Files.createTempFile(css.toPath(), rootName, ".css");
-                        Files.createTempFile(i18n.toPath(), "18n", ".properties");
-                        writeToFile(tempIndex, indexHtml);
-                        writeToFile(tempView, mainView);
-                        writeToFile(tempController, mainController);
+                        File createFile = new File(tempProject.getAbsolutePath() + "\\" + "Index.html");
+                        writeToFile(createFile, indexHtml);
+                        createFile = new File(tempProject.getAbsolutePath() + "\\"+ rootName + "\\"  + "Main.view." + ext);
+                        writeToFile(createFile, mainView);
+                        createFile = new File(tempProject.getAbsolutePath() + "\\" + rootName + "\\" + "Main.controller." + ext);
+                        writeToFile(createFile, mainController);
+                        createFile = new File(tempProject.getAbsolutePath() + "\\css\\" + rootName + ".css");
+                        writeToFile(createFile, "");
+                        createFile = new File(tempProject.getAbsolutePath() + "\\i18n\\" + "i18n.properties");
+                        writeToFile(createFile, "");
 
 
                         File[] files = tempProject.listFiles();
