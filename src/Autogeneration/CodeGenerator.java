@@ -158,7 +158,7 @@ class CodeGenerator {
         sb = new StringBuilder();
         sb.append("{\n" +
                 "\t\"Type\":\"sap.ui.core.mvc.JSONView\",\n" +
-                "\t\"controllerName\":\"").append(controllerPath).append(",\t\"content\": [{");
+                "\t\"controllerName\":\"").append(controllerPath).append("\",\n\t\"content\": [{\n");
         switch (ui5Library){
             case Desktop:
                 break;
@@ -167,7 +167,7 @@ class CodeGenerator {
                         "\t\t\"title\":\"Title\",\n" +
                         "\t\t\"content\":[\n" +
                         "\t\t\n" +
-                        "\t\t]");
+                        "\t\t]\n");
                 break;
         }
         sb.append("\t}]\n" +
