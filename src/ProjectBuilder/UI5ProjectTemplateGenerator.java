@@ -78,7 +78,7 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
                         writeToFile(createFile, indexHtml);
                         createFile = new File(tempProject.getAbsolutePath() + "\\"+ rootName + "\\"  + "Main.view." + ext);
                         writeToFile(createFile, mainView);
-                        createFile = new File(tempProject.getAbsolutePath() + "\\" + rootName + "\\" + "Main.controller." + ext);
+                        createFile = new File(tempProject.getAbsolutePath() + "\\" + rootName + "\\" + "Main.controller.js");
                         writeToFile(createFile, mainController);
                         createFile = new File(tempProject.getAbsolutePath() + "\\css\\" + rootName + ".css");
                         writeToFile(createFile, "");
