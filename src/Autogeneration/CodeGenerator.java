@@ -91,13 +91,13 @@ class CodeGenerator {
                 break;
             case Mobile:
                 sb.append("\t<div data-sap-ui-type=\"sap.m.Page\" data-title=\"Title\">\n" +
-                        "\t\t<div data-sap-ui-aggregation=\"content\">\n" +
+                        "\t\t\n<div data-sap-ui-aggregation=\"content\">\n" +
                         "\t\t\n" +
                         "\t\t</div>\n" +
-                        "\t</div>");
+                        "\t</div>\n");
                 break;
         }
-        sb.append("</template>\n");
+        sb.append("\n</template>\n");
         return sb.toString();
     }
 
