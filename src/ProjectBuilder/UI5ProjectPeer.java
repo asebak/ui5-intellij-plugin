@@ -17,6 +17,7 @@ import java.util.Enumeration;
  * This class is responsible for the UI of the project creator
  */
 public class UI5ProjectPeer implements WebProjectGenerator.GeneratorPeer<UI5ProjectTemplateGenerator.UI5ProjectSettings> {
+    private UI5ProjectTemplateGenerator.UI5ProjectSettings settings = new UI5ProjectTemplateGenerator.UI5ProjectSettings();
     private final java.util.List<WebProjectGenerator.SettingsStateListener> stateListeners = ContainerUtil.createLockFreeCopyOnWriteList();
     private JPanel applicationTypeGroup =  new JPanel();
     private JPanel viewTypeGroup=  new JPanel();
@@ -29,6 +30,10 @@ public class UI5ProjectPeer implements WebProjectGenerator.GeneratorPeer<UI5Proj
     private JRadioButton jsViewButton = new JRadioButton("Javascript");
     private JRadioButton xmlViewButton = new JRadioButton("XML");
 
+    public UI5ProjectPeer(){
+        initializeViews();
+
+    }
     @NotNull
     @Override
     public JComponent getComponent() {
@@ -37,7 +42,6 @@ public class UI5ProjectPeer implements WebProjectGenerator.GeneratorPeer<UI5Proj
 
     @Override
     public void buildUI(@NotNull SettingsStep settingsStep) {
-        initializeViews();
         settingsStep.addSettingsField("Project Type:", applicationTypeGroup);
         settingsStep.addSettingsField("Initial View Type:", viewTypeGroup);
     }
@@ -71,7 +75,6 @@ public class UI5ProjectPeer implements WebProjectGenerator.GeneratorPeer<UI5Proj
     @NotNull
     @Override
     public UI5ProjectTemplateGenerator.UI5ProjectSettings getSettings() {
-        UI5ProjectTemplateGenerator.UI5ProjectSettings settings = new UI5ProjectTemplateGenerator.UI5ProjectSettings();
         UI5Library ui5Library = null;
         UI5View ui5View = null;
         String appType = getSelectedButton(applicationTypeButtonGroup);

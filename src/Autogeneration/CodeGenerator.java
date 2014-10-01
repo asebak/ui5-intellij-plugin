@@ -68,7 +68,7 @@ class CodeGenerator {
                         "\t\t\t\tsap.ui.localResources(\"util\");\n" +
                         "\t\t\t\tsap.ui.localResources(\"i18n\");\n" +
                         "\t\t\t\tvar app = new sap.m.App({initialPage:\"app\"});\n" +
-                        "\t\t\t\tvar page = sap.ui.view({id:\"app\", viewName:\"").append(rootModuleName).append(".Main, type:sap.ui.core.mvc.ViewType.")
+                        "\t\t\t\tvar page = sap.ui.view({id:\"app\", viewName:\"").append(rootModuleName).append(".Main\", type:sap.ui.core.mvc.ViewType.")
                         .append(intialViewExt).append("});\n" +
                         "\t\t\t\tapp.addPage(page);\n" +
                         "\t\t\t\tapp.placeAt(\"content\");\n" +
