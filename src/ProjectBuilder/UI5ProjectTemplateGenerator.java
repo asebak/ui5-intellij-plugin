@@ -67,10 +67,12 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
 
                         File i18n = new File (tempProject,"i18n");
                         File css = new File (tempProject, "css");
+                        File util = new File(tempProject, "util");
                         File rootFolder = new File (tempProject, rootName);
                         i18n.mkdir();
                         css.mkdir();
                         rootFolder.mkdir();
+                        util.mkdir();
                         String mainController = Controller.getAutogenerateCode(rootName, "Main");
                         File createFile = new File(tempProject.getAbsolutePath() + "\\" + "Index.html");
                         writeToFile(createFile, indexHtml);
