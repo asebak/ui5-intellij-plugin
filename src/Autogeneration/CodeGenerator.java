@@ -137,12 +137,12 @@ class CodeGenerator {
         switch (ui5Library){
             case Desktop:
                 sb.append("<core:View xmlns:core=\"sap.ui.core\" xmlns:mvc=\"sap.ui.core.mvc\" xmlns=\"sap.ui.commons\"")
-                        .append("controllerName='").append(controllerPath).append("'").append(" xmlns:html=\"http://www.w3.org/1999/xhtml\">\n" +
+                        .append(" controllerName='").append(controllerPath).append("'").append(" xmlns:html=\"http://www.w3.org/1999/xhtml\">\n" +
                         "</core:View>");
                 break;
             case Mobile:
                 sb.append("<core:View xmlns:core=\"sap.ui.core\" xmlns:mvc=\"sap.ui.core.mvc\" xmlns=\"sap.m\"")
-                        .append("controllerName='").append(controllerPath).append("'").append(" xmlns:html=\"http://www.w3.org/1999/xhtml\">\n" +
+                        .append(" controllerName='").append(controllerPath).append("'").append(" xmlns:html=\"http://www.w3.org/1999/xhtml\">\n" +
                         "\t<Page title=\"Title\">\n" +
                         "\t\t<content>\n" +
                         "\t\n" +
