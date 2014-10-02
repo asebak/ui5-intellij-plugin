@@ -26,6 +26,7 @@
         <stepsBeforeRunProvider implementation="Runner.UI5AddBeforeRun"/>
         <errorHandler implementation="com.intellij.diagnostic.ITNReporter"/>
         <documentationProvider implementation="Providers.UI5DocumentationProvider"/>
+        <fileTypeFactory implementation="FileBuilder.UI5FileFactory"/>
         <!--<defaultLiveTemplatesProvider implementation="Providers.UI5TemplatesProvider"/>-->
     </extensions>
 
