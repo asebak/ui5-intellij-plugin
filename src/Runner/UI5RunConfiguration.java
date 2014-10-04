@@ -15,6 +15,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by asebak on 9/28/2014.
  */
+//LocatableConfigurationBase
 public class UI5RunConfiguration extends LocatableConfigurationBase {
     protected UI5RunConfiguration(Project project, ConfigurationFactory factory, String name) {
         super(project, factory, name);
@@ -23,12 +24,13 @@ public class UI5RunConfiguration extends LocatableConfigurationBase {
     @NotNull
     @Override
     public SettingsEditor<? extends RunConfiguration> getConfigurationEditor() {
-        return null;
+        return new UI5ConfigurationEditor(getProject());
+
     }
 
     @Nullable
     @Override
     public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment executionEnvironment) throws ExecutionException {
-        return null;
+        return new UI5RunProfileState(getProject(), executionEnvironment, this);
     }
 }
