@@ -33,4 +33,11 @@
 
     <project-components>
     </project-components>
+    <actions>
+        <action id="NewUI5ViewFile" class="FileBuilder.UI5CreateFileAction"
+                text="UI5"
+                description="Create a new UI5 Component">
+            <add-to-group group-id="NewGroup" anchor="before" relative-to-action="NewFromTemplate"/>
+        </action>
+    </actions>
 </idea-plugin>
