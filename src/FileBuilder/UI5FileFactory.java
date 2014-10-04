@@ -5,12 +5,11 @@ import com.intellij.openapi.fileTypes.FileTypeFactory;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by asebak on 10/1/2014.
+ * Created by asebak on 10/4/2014.
  */
 public class UI5FileFactory extends FileTypeFactory {
     @Override
     public void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer) {
 
-//       fileTypeConsumer.consume(null);
     }
 }
