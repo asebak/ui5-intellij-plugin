@@ -39,5 +39,14 @@
                 description="Create a new UI5 Component">
             <add-to-group group-id="NewGroup" anchor="before" relative-to-action="NewFromTemplate"/>
         </action>
+        <action id="UI5Search" class="Actions.UI5ApiSearch"
+                text="UI5 Api Search"
+                description="Search code on the openUI5 api" icon="/Icons/ui5.png">
+            <keyboard-shortcut
+                    keymap="$default"
+                    first-keystroke="shift ctrl G"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="after"
+                          relative-to-action="FindUsages"/>
+        </action>
     </actions>
 </idea-plugin>
