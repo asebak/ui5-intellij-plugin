@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by asebak on 10/4/2014.
  */
+@Deprecated
 public class UI5FileFactory extends FileTypeFactory {
     @Override
     public void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer) {

@@ -19,16 +19,18 @@
     <depends>com.intellij.modules.lang</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <configurationType implementation="Runner.UI5ConfigurationType"/>
+        <!--<configurationType implementation="Runner.UI5ConfigurationType"/>-->
         <applicationService serviceInterface="Config.UI5Settings" serviceImplementation="Config.UI5Settings"/>
         <directoryProjectGenerator implementation="ProjectBuilder.UI5ProjectTemplateGenerator"/>
         <projectTemplatesFactory implementation="ProjectBuilder.UI5TemplatesFactory"/>
-        <projectConfigurable provider="Runner.UI5ConfigurationType"/>
-        <stepsBeforeRunProvider implementation="Runner.UI5AddBeforeRun"/>
+        <!--<projectConfigurable provider="Runner.UI5ConfigurationType"/>-->
+        <!--<stepsBeforeRunProvider implementation="Runner.UI5AddBeforeRun"/>-->
         <errorHandler implementation="com.intellij.diagnostic.ITNReporter"/>
         <documentationProvider implementation="Providers.UI5DocumentationProvider"/>
-        <fileTypeFactory implementation="FileBuilder.UI5FileFactory"/>
+        <!--<fileTypeFactory implementation="FileBuilder.UI5FileFactory"/>-->
         <defaultLiveTemplatesProvider implementation="Providers.UI5TemplatesProvider"/>
+        <programRunner implementation="Runner.UI5Runner"/>
+        <configurationType implementation="Runner.UI5RunConfigurationType"/>
     </extensions>
 
     <project-components>

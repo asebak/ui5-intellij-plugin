@@ -27,7 +27,6 @@ public class UI5CreateFileAction extends CreateFileFromTemplateAction implements
 
     @Override
     protected void buildDialog(Project project, PsiDirectory directory, CreateFileFromTemplateDialog.Builder builder) {
-
         builder.setTitle("UI5 Component")
                 .addKind("Javascript View", AllIcons.FileTypes.JavaScript, "ColdFusion File.cfm")
                 .addKind("HTML View", AllIcons.FileTypes.Html, "ColdFusion Script Component.cfc")
@@ -38,6 +37,7 @@ public class UI5CreateFileAction extends CreateFileFromTemplateAction implements
 
     @Override
     protected String getActionName(PsiDirectory directory, String newName, String templateName) {
+        //TODO implement template to add
         return "UI5 file";
     }
 }

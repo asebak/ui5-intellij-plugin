@@ -32,7 +32,6 @@ public class UI5ApiSearchDialog {
         AbstractAction queryAction = new AbstractAction("Search") {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    //TODO: Fix url not going to correct path
                     Desktop.getDesktop().browse(new URL("https://sapui5.netweaver.ondemand.com/sdk/search.html?q=" + searchTerm).toURI());
                 } catch (Exception e1) {
                     e1.printStackTrace();
