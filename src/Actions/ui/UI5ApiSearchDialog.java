@@ -21,9 +21,9 @@ public class UI5ApiSearchDialog {
 
     public void show(final String searchTerm) {
         final DialogBuilder dialogBuilder = new DialogBuilder(project);
-        dialogBuilder.setTitle("Expedia Confluence Search");
+        dialogBuilder.setTitle("UI5 Api Search");
         JLabel myLabel = new JLabel("Search Term: ");
-        JTextField searchTextField = new JTextField(searchTerm);
+        final JTextField searchTextField = new JTextField(searchTerm);
 
         JPanel panel = new JPanel(new BorderLayout());
         panel.add(myLabel, BorderLayout.WEST);
@@ -32,7 +32,7 @@ public class UI5ApiSearchDialog {
         AbstractAction queryAction = new AbstractAction("Search") {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    Desktop.getDesktop().browse(new URL("https://sapui5.netweaver.ondemand.com/sdk/search.html?q=" + searchTerm).toURI());
+                    Desktop.getDesktop().browse(new URL("https://sapui5.netweaver.ondemand.com/sdk/search.html?q=" + searchTextField.getText()).toURI());
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }

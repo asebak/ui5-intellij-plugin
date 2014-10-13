@@ -6,6 +6,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by asebak on 9/28/2014.
  */
+@Deprecated
 public class UI5TemplatesProvider implements DefaultLiveTemplatesProvider {
     @Override
     public String[] getDefaultLiveTemplateFiles() {

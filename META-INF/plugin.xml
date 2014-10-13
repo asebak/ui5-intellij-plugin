@@ -1,20 +1,20 @@
 <!--If plugin is not showing up launch intellij and go into plugin settings and enable the plugin-->
 <idea-plugin version="2">
-  <id>com.atsebak.ui5</id>
-  <name>OpenUI5</name>
-  <version>1.0</version>
-  <vendor email="ahmad@atsebak.com" url="http://www.atsebak.com">At Sebak</vendor>
+    <id>com.atsebak.ui5</id>
+    <name>OpenUI5</name>
+    <version>1.0</version>
+    <vendor email="ahmad@atsebak.com" url="http://www.atsebak.com">At Sebak</vendor>
 
-  <description><![CDATA[
+    <description><![CDATA[
     This is an OpenUI5 Plugin for Intellij Platforms
     ]]></description>
 
-  <change-notes><![CDATA[
+    <change-notes><![CDATA[
       Add change notes here.<br>
       <em>most HTML tags may be used</em>
     ]]>
-  </change-notes>
-  <idea-version since-build="131"/>
+    </change-notes>
+    <idea-version since-build="131"/>
 
     <depends>com.intellij.modules.lang</depends>
 
@@ -28,7 +28,7 @@
         <errorHandler implementation="com.intellij.diagnostic.ITNReporter"/>
         <documentationProvider implementation="Providers.UI5DocumentationProvider"/>
         <!--<fileTypeFactory implementation="FileBuilder.UI5FileFactory"/>-->
-        <defaultLiveTemplatesProvider implementation="Providers.UI5TemplatesProvider"/>
+        <!--<defaultLiveTemplatesProvider implementation="Providers.UI5TemplatesProvider"/>-->
         <programRunner implementation="Runner.UI5Runner"/>
         <configurationType implementation="Runner.UI5RunConfigurationType"/>
     </extensions>
