@@ -5,6 +5,7 @@
 ```
 Not yet released
 ```
+
 ## Extension Overview
 ```
 This unofficial extension allows you to create basic OpenUI5 Apps
@@ -21,6 +22,10 @@ a desktop or mobile HTML5 application for the SAP UI5 framework.
 - Run Configuration 
 - OpenUI5 Api Documentation Searching
 ```
+![ScreenShot](https://raw.githubusercontent.com/asebak/UI5-IntelliJ-Plugin/master/Resources/diagrams/ui5app.png)
+![ScreenShot](https://raw.githubusercontent.com/asebak/UI5-IntelliJ-Plugin/master/Resources/diagrams/ui5apisearch.png)
+![ScreenShot](https://raw.githubusercontent.com/asebak/UI5-IntelliJ-Plugin/master/Resources/diagrams/ui5file.png)
+![ScreenShot](https://raw.githubusercontent.com/asebak/UI5-IntelliJ-Plugin/master/Resources/diagrams/ui5config.png)
 
 
 ## Support or Contact
