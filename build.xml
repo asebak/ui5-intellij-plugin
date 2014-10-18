@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.switchfly</groupId>
+    <artifactId>targetprocess-intellij-plugin</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <maven.compiler.source>1.6</maven.compiler.source>
+        <maven.compiler.target>1.6</maven.compiler.target>
+
+        <lib.path>${basedir}/lib</lib.path>
+        <idea.version>129.713</idea.version>
+    </properties>
+
+    <packaging>jar</packaging>
+
+    <name>TargetProcess Intellij Plugin</name>
+    <description>A TargetProcess Plugin for Intellij</description>
+    <inceptionYear>2013</inceptionYear>
+
+    <scm>
+        <connection>scm:git:ssh://git@github.com:switchfly/targetprocess-intellij-plugin.git</connection>
+        <url>git:ssh://git@github.com:switchfly/targetprocess-intellij-plugin.git</url>
+    </scm>
+
+    <licenses>
+        <license>
+            <name>The MIT License (MIT)</name>
+            <url>https://raw.github.com/switchfly/targetprocess-intellij-plugin/master/LICENSE.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Julio Gutierrez</name>
+            <email>bubuntux@gmail.com</email>
+            <organization>Switchfly</organization>
+            <timezone>-6</timezone>
+        </developer>
+        <developer>
+            <name>Isaac Lopez</name>
+            <organization>Switchfly</organization>
+            <timezone>-7</timezone>
+        </developer>
+        <developer>
+            <name>Ruben Terrazas</name>
+            <organization>Switchfly</organization>
+            <timezone>-6</timezone>
+        </developer>
+        <developer>
+            <name>Jonathan Lara</name>
+            <organization>Switchfly</organization>
+            <timezone>-5</timezone>
+        </developer>
+    </developers>
+
+    <dependencies>
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+            <version>1.7</version>
+        </dependency>
+
+        <!-- Test dependencies -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.10</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- IntelliJ SDK -->
+        <dependency>
+            <groupId>com.intellij</groupId>
+            <artifactId>annotations</artifactId>
+            <version>12.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij</groupId>
+            <artifactId>openapi</artifactId>
+            <scope>system</scope>
+            <systemPath>${lib.path}/openapi.jar</systemPath>
+            <version>${idea.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij</groupId>
+            <artifactId>task</artifactId>
+            <scope>system</scope>
+            <systemPath>${lib.path}/tasks-api.jar</systemPath>
+            <version>${idea.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij</groupId>
+            <artifactId>idea-util</artifactId>
+            <scope>system</scope>
+            <systemPath>${lib.path}/util.jar</systemPath>
+            <version>${idea.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij</groupId>
+            <artifactId>idea-extensions</artifactId>
+            <scope>system</scope>
+            <systemPath>${lib.path}/extensions.jar</systemPath>
+            <version>${idea.version}</version>
+        </dependency>
+    </dependencies>
+
+</project>
