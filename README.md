@@ -22,7 +22,7 @@ a desktop or mobile HTML5 application for the SAP UI5 framework.
 - OpenUI5 Api Documentation Searching
 ```
 
-```
+
 ## Support or Contact
 ```
 If you are having an difficulties using the extension, or want an additional feature or to report a bug.  Please report it on github.
