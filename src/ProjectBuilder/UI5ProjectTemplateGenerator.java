@@ -5,6 +5,7 @@ import Autogeneration.Index;
 import Autogeneration.UI5Library;
 import Autogeneration.UI5View;
 import Util.UI5Icons;
+import Util.Writer;
 import com.intellij.ide.util.projectWizard.WebProjectTemplate;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.Module;
@@ -17,9 +18,7 @@ import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 
 /**
@@ -75,15 +74,15 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
                         util.mkdir();
                         String mainController = Controller.getAutogenerateCode(rootName, "Main");
                         File createFile = new File(tempProject.getAbsolutePath() + "\\" + "Index.html");
-                        writeToFile(createFile, indexHtml);
+                        Writer.writeToFile(createFile, indexHtml);
                         createFile = new File(tempProject.getAbsolutePath() + "\\"+ rootName + "\\"  + "Main.view." + ext);
-                        writeToFile(createFile, mainView);
+                        Writer.writeToFile(createFile, mainView);
                         createFile = new File(tempProject.getAbsolutePath() + "\\" + rootName + "\\" + "Main.controller.js");
-                        writeToFile(createFile, mainController);
+                        Writer.writeToFile(createFile, mainController);
                         createFile = new File(tempProject.getAbsolutePath() + "\\css\\" + rootName + ".css");
-                        writeToFile(createFile, "");
+                        Writer.writeToFile(createFile, "");
                         createFile = new File(tempProject.getAbsolutePath() + "\\i18n\\" + "i18n.properties");
-                        writeToFile(createFile, "");
+                        Writer.writeToFile(createFile, "");
 
 
                         File[] files = tempProject.listFiles();
@@ -106,20 +105,6 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
         }
         catch (Exception e) {
         }
-    }
-
-    private void forceRename(File source, File target) throws IOException
-    {
-        if (target.exists()){
-            target.delete();
-        }
-        source.renameTo(target);
-    }
-
-    private void writeToFile(File file, String content) throws IOException{
-        BufferedWriter bw = new BufferedWriter(new FileWriter(file));
-        bw.write(content);
-        bw.close();
     }
 
     private File createTemp() throws IOException {
