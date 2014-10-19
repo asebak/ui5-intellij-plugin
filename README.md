@@ -3,7 +3,7 @@
 
 ## Download
 ```
-Not yet released
+JetBrains Plugin Page http://plugins.jetbrains.com/plugin/7591
 ```
 
 ## Extension Overview
