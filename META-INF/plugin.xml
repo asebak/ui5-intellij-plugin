@@ -2,7 +2,7 @@
 <idea-plugin version="2">
     <id>com.atsebak.ui5</id>
     <name>OpenUI5</name>
-    <version>1.0</version>
+    <version>1.1</version>
     <vendor email="ahmad@atsebak.com" url="http://www.atsebak.com">At Sebak</vendor>
 
     <description><![CDATA[
@@ -10,8 +10,7 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>
+            Fixed major bug interfering with nodejs platform.
     ]]>
     </change-notes>
     <idea-version since-build="131"/>

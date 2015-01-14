@@ -18,6 +18,7 @@ package Runner;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.RunProfile;
 import com.intellij.execution.configurations.RunProfileState;
+import com.intellij.execution.executors.DefaultRunExecutor;
 import com.intellij.execution.runners.DefaultProgramRunner;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.ui.RunContentDescriptor;
@@ -50,8 +51,6 @@ public class UI5Runner extends DefaultProgramRunner {
 
     @Override
     public boolean canRun(@NotNull String executorId, @NotNull RunProfile profile) {
-        return true;
-//		return DefaultRunExecutor.EXECUTOR_ID.equals(executorId) && (profile instanceof CfmlRunConfiguration || profile instanceof
-//				CfmlUnitRunConfiguration);
+        return DefaultRunExecutor.EXECUTOR_ID.equals(executorId) && (profile instanceof UI5RunConfiguration);
     }
 }
