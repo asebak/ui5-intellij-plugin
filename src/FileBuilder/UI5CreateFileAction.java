@@ -52,8 +52,8 @@ public class UI5CreateFileAction extends CreateFileFromTemplateAction implements
                 String createdName = createdElement.getName();
                 String newCreatedName = createdName.replace("." + ext, "") + ".view." + ext;
                 createdElement.setName(newCreatedName);
-                String viewFilePath = createdElement.getVirtualFile().getParent().getPath() + "\\" + newCreatedName;
-                String controllerFilePath = createdElement.getVirtualFile().getParent().getPath() + "\\" + createdName.replace("." + ext, "") + ".controller.js";
+                String viewFilePath = createdElement.getVirtualFile().getParent().getPath() + File.separator + newCreatedName;
+                String controllerFilePath = createdElement.getVirtualFile().getParent().getPath() + File.separator + createdName.replace("." + ext, "") + ".controller.js";
                 File controllerFile = new File(controllerFilePath);
                 File viewFile = new File(viewFilePath);
                 UI5View ui5View = null;
