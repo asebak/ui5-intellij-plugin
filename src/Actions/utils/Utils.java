@@ -8,9 +8,6 @@ import com.intellij.openapi.vfs.VirtualFile;
 
 import java.io.File;
 
-/**
- * Created by asebak on 10/6/2014.
- */
 public class Utils {
     public static File fileFor(AnActionEvent actionEvent) {
         VirtualFile virtualFile = (VirtualFile) actionEvent.getDataContext()
