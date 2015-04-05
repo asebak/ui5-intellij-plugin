@@ -6,6 +6,16 @@
 JetBrains Plugin Page http://plugins.jetbrains.com/plugin/7591
 ```
 
+## Checking out and Building
+
+Configure your Intellij environment using the following link: https://www.jetbrains.com/idea/help/configuring-intellij-platform-plugin-sdk.html
+
+You can build the project directly from IDEA.  Continous Integration script can be executed using:
+```sh
+$ sudo sh ./ci-build.sh
+```
+
+
 ## Extension Overview
 ```
 This unofficial extension allows you to create basic OpenUI5 Apps
