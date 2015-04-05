@@ -14,9 +14,6 @@
     </path>
     <path id="my.classpath">
         <pathelement location="${build}"/>
-        <fileset dir="${lib.location}">
-            <include name="*.jar"/>
-        </fileset>
     </path>
     <path id="classpath">
         <path refid="my.classpath"/>
