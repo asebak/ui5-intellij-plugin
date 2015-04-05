@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/asebak/UI5-IntelliJ-Plugin.svg?branch=master)](https://travis-ci.org/asebak/UI5-IntelliJ-Plugin)
 ## Download
 ```
-JetBrains Plugin Page http://plugins.jetbrains.com/plugin/7591
+http://plugins.jetbrains.com/plugin/7591
 ```
 
 ## Checking out and Building
