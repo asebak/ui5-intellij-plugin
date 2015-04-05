@@ -1,10 +1,7 @@
 <project name="Open UI Intellij Plugin" default="test" basedir=".">
     <property name="build.compiler" value="modern"/>
-    <property name="lib.location" location="${basedir}/lib"/>
     <property name="src" location="${basedir}/src"/>
-    <property name="test.src" location="${basedir}/test"/>
     <property name="build" location="build"/>
-    <property name="test.build" location="build_test"/>
     <property name="resources" value="${basedir}/Resources"/>
     <property name="idea.community.build" location="${basedir}/idea-IC/"/>
     <path id="idea.classpath">
@@ -24,23 +21,6 @@
     <path id="classpath">
         <path refid="my.classpath"/>
         <path refid="idea.classpath"/>
-    </path>
-    <path id="classpath.test">
-        <pathelement location="${build}"/>
-        <pathelement location="${test.build}"/>
-        <fileset dir="${lib.location}">
-            <include name="*.jar"/>
-        </fileset>
-        <fileset dir="${idea.community.build}/lib">
-            <include name="**/*.jar"/>
-            <exclude name="ant/lib/**/*.jar"/>
-        </fileset>
-        <fileset dir="${idea.community.build}/plugins/coverage/lib">
-            <include name="*.jar"/>
-        </fileset>
-        <fileset dir="${java.home}/../lib">
-            <include name="**/*.jar"/>
-        </fileset>
     </path>
     <taskdef name="javac2" classname="com.intellij.ant.Javac2">
         <classpath>
@@ -86,7 +66,6 @@
     <target name="init">
         <tstamp/>
         <mkdir dir="${build}"/>
-        <mkdir dir="${test.build}"/>
         <echo message="Using IDEA build from: ${idea.community.build}"/>
         <echo message="Using JAVA_HOME: ${java.home}"/>
     </target>
@@ -105,35 +84,7 @@
             </fileset>
         </copy>
     </target>
-    <target name="compile_test" depends="compile" description="Compile tests">
-        <compile dest="${test.build}"/>
-    </target>
-    <target name="test" depends="compile_test" description="Run the tests">
-        <echo message="Running tests"/>
-        <property name="suspend" value="n"/>
-        <junit printsummary="yes" haltonfailure="false" showoutput="yes" failureProperty="failure_found" fork="yes"
-               forkmode="once" reloading="no">
-            <jvmarg value="-Didea.home.path=${idea.community.build}"/>
-            <jvmarg value="-Xbootclasspath/a:${idea.community.build}/lib/boot.jar"/>
-            <jvmarg value="-Dfile.encoding=UTF-8"/>
-            <jvmarg value="-ea"/>
-            <jvmarg line="-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=${suspend},address=43251"/>
-            <jvmarg value="-Didea.launcher.bin.path=${idea.community.build}/bin"/>
-            <classpath refid="classpath.test"/>
-            <formatter type="brief" usefile="false"/>
-            <batchtest>
-                <fileset dir="${test.src}">
-                    <include name="**/*Test.java"/>
-                </fileset>
-            </batchtest>
-        </junit>
-        <antcall target="check_test"/>
-    </target>
-    <target name="check_test" if="failure_found">
-        <fail message="Failures found"/>
-    </target>
     <target name="clean" description="clean up">
         <delete dir="${build}"/>
-        <delete dir="${test.build}"/>
     </target>
 </project>
