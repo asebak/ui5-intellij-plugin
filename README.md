@@ -1,6 +1,6 @@
 ![alt tag](http://sap.github.io/openui5/images/OpenUI5_new_big_side.png)
 ======
-
+[![Build Status](https://travis-ci.org/asebak/UI5-IntelliJ-Plugin.svg?branch=master)](https://travis-ci.org/asebak/UI5-IntelliJ-Plugin)
 ## Download
 ```
 JetBrains Plugin Page http://plugins.jetbrains.com/plugin/7591
