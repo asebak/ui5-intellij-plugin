@@ -2,28 +2,30 @@ package com.atsebak.ui5.projectbuilder;
 
 import com.atsebak.ui5.autogeneration.Controller;
 import com.atsebak.ui5.autogeneration.Index;
-import com.atsebak.ui5.autogeneration.UI5Library;
 import com.atsebak.ui5.autogeneration.UI5View;
+import com.atsebak.ui5.config.UI5Library;
+import com.atsebak.ui5.locale.UI5Bundle;
+import com.atsebak.ui5.util.UI5FileBuilder;
 import com.atsebak.ui5.util.UI5Icons;
 import com.atsebak.ui5.util.Writer;
 import com.intellij.ide.util.projectWizard.WebProjectTemplate;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import lombok.Data;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 
 /**
- * Created by asebak on 9/27/2014.
- * This is for the sub template of the project. \
+ * This is for the sub template of the project.
  * Once the finished but is click generateProject method is called and runs a seperate process
  */
 public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTemplateGenerator.UI5ProjectSettings> {
@@ -36,82 +38,47 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
 
     @Override
     public String getDescription() {
-        return "<html>OpenUI5 Project Template for Mobile or Desktop Apps</html>";
+        return UI5Bundle.getString("app.description");
     }
-
 
     @Override
     public void generateProject(@NotNull Project project, @NotNull final VirtualFile virtualFile, @NotNull final UI5ProjectSettings settings, @NotNull Module module) {
-        try {
+        final Index index = new Index();
+        final ProgressIndicator indicator = ProgressManager.getInstance().getProgressIndicator();
+        final String ext = settings.getView().getExtension();
 
-            ProgressManager.getInstance().runProcessWithProgressSynchronously(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        ProgressIndicator indicator = ProgressManager.getInstance().getProgressIndicator();
-                        indicator.setText("Creating OpenUI5 Project");
-                        File tempProject = createTemp();
+        ProgressManager.getInstance().runProcessWithProgressSynchronously(new Runnable() {
+            @Override
+            public void run() {
+                indicator.setIndeterminate(true);
+                indicator.setText(UI5Bundle.getString("project.creating"));
+                String rootName = virtualFile.getNameWithoutExtension().toLowerCase().replace(" ", "");
+                String indexHtml = index.createIndexCode(settings.getLibrary(), rootName, ext);
+                try {
+                    File tempProject = createTemp();
+                    String mainView = settings.getView().autogenerateCode(settings.getLibrary(), rootName + ".Main");
+                    createPaths(tempProject, new String[]{"i18n", "css", "util", rootName});
+                    String mainController = Controller.getAutogenerateCode(rootName, "Main");
 
+                    writeToFile(tempProject, "", "Index.html", indexHtml);
+                    writeToFile(tempProject, rootName, "Main.view." + ext, mainView);
+                    writeToFile(tempProject, rootName, "Main.controller.js", mainController);
+                    writeToFile(tempProject, "css", rootName + ".css", "");
+                    writeToFile(tempProject, "i18n", "i18n.properties", "");
 
-
-                        com.atsebak.ui5.autogeneration.Index index = new Index();
-                        String ext = settings.getUi5View().getExtension();
-                        String rootName = virtualFile.getNameWithoutExtension().toLowerCase().replace(" ", "");
-                        String indexHtml = index.createIndexCode(settings.getUi5Library(),
-                                rootName,
-                                ext);
-
-                        String mainView = settings.getUi5View().autogenerateCode(settings.getUi5Library(),
-                                rootName + ".Main");
-
-                        File i18n = new File (tempProject,"i18n");
-                        File css = new File (tempProject, "css");
-                        File util = new File(tempProject, "util");
-                        File rootFolder = new File (tempProject, rootName);
-                        i18n.mkdir();
-                        css.mkdir();
-                        rootFolder.mkdir();
-                        util.mkdir();
-                        String mainController = Controller.getAutogenerateCode(rootName, "Main");
-                        File createFile = new File(tempProject.getAbsolutePath() + File.separator + "Index.html");
-                        Writer.writeToFile(createFile, indexHtml);
-                        createFile = new File(tempProject.getAbsolutePath() + File.separator + rootName + File.separator  + "Main.view." + ext);
-                        Writer.writeToFile(createFile, mainView);
-                        createFile = new File(tempProject.getAbsolutePath() + File.separator + rootName + File.separator + "Main.controller.js");
-                        Writer.writeToFile(createFile, mainController);
-                        createFile = new File(tempProject.getAbsolutePath() + File.separator + "css" + File.separator + rootName + ".css");
-                        Writer.writeToFile(createFile, "");
-                        createFile = new File(tempProject.getAbsolutePath() + File.separator + "i18n" + File.separator + "i18n.properties");
-                        Writer.writeToFile(createFile, "");
-
-
-                        File[] files = tempProject.listFiles();
-                        assert files != null && files.length != 0;
-                        FileUtil.copyDir(tempProject, new File(virtualFile.getPath()));
-                        deleteTemp(tempProject);
-                    }
-                    catch (Exception e) {
-                        throw new RuntimeException(e.getMessage(), e);
-                    }
+                    transferTempFilesToProject(tempProject, virtualFile);
+                } catch (Exception e) {
+                    throw new RuntimeException(e.getMessage(), e);
                 }
-            }, "Creating OpenUI5 project", false, project);
-
-            ApplicationManager.getApplication().runWriteAction(new Runnable() {
-                @Override
-                public void run() {
-
-                }
-            });
-        }
-        catch (Exception e) {
-        }
+            }
+        }, UI5Bundle.getString("project.creating"), false, project);
     }
 
     private File createTemp() throws IOException {
         return FileUtil.createTempDirectory("ui5-generated-project", null, false);
     }
 
-    private void deleteTemp(File tempProject) {
+    private void deleteTemp(@NotNull File tempProject) {
         FileUtil.delete(tempProject);
     }
 
@@ -126,24 +93,28 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
         return new UI5ProjectPeer();
     }
 
+    private void createPaths(@NotNull File tempDir, @NotNull String[] paths) {
+        for (int i = 0; i < paths.length; i++) {
+            UI5FileBuilder.createDirectoryFromName(tempDir, paths[i]);
+        }
+    }
+
+    private void writeToFile(@NotNull File tempProject, @Nullable String path, @NotNull String fileName, @Nullable String content) throws IOException {
+        File file = new File(tempProject.getAbsolutePath() + File.separator + path + File.separator + fileName);
+        Writer.writeToFile(file, content);
+    }
+
+    private void transferTempFilesToProject(@NotNull File tempProject, @NotNull VirtualFile virtualFile) throws IOException {
+        File[] files = tempProject.listFiles();
+        assert files != null && files.length != 0;
+        FileUtil.copyDir(tempProject, new File(virtualFile.getPath()));
+        deleteTemp(tempProject);
+    }
+
+    @Data
     final static class UI5ProjectSettings {
-        private UI5View  ui5View;
-        private UI5Library ui5Library;
-        public UI5View getUi5View() {
-            return ui5View;
-        }
-
-        public void setUi5View(UI5View ui5View) {
-            this.ui5View = ui5View;
-        }
-
-        public UI5Library getUi5Library() {
-            return ui5Library;
-        }
-
-        public void setUi5Library(UI5Library ui5Library) {
-            this.ui5Library = ui5Library;
-        }
+        private UI5View view;
+        private UI5Library library;
     }
 }
 

@@ -1,10 +1,12 @@
 package com.atsebak.ui5.autogeneration;
 
+import com.atsebak.ui5.config.UI5Library;
+
 /**
- * Created by asebak on 9/28/2014.
  * Uses String Builder instead of t4 like in vs
+ * TODO: Eventually Redo this using templates instead of strings
  */
-class CodeGenerator {
+public final class CodeGenerator {
     private StringBuilder sb;
     public String createControllerCode(String modulePath, String controllerName){
         String root = modulePath + "." + controllerName;

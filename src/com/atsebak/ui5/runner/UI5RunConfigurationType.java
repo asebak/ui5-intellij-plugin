@@ -1,4 +1,3 @@
-
 package com.atsebak.ui5.runner;
 
 import com.atsebak.ui5.util.UI5Icons;

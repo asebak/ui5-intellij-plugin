@@ -1,6 +1,7 @@
 package com.atsebak.ui5.projectbuilder;
 
 import com.atsebak.ui5.autogeneration.*;
+import com.atsebak.ui5.config.UI5Library;
 import com.intellij.ide.util.projectWizard.SettingsStep;
 import com.intellij.openapi.ui.ValidationInfo;
 import com.intellij.platform.WebProjectGenerator;
@@ -13,12 +14,11 @@ import java.awt.*;
 import java.util.Enumeration;
 
 /**
- * Created by asebak on 9/27/2014.
  * This class is responsible for the UI of the project creator
  */
 public class UI5ProjectPeer implements WebProjectGenerator.GeneratorPeer<UI5ProjectTemplateGenerator.UI5ProjectSettings> {
-    private UI5ProjectTemplateGenerator.UI5ProjectSettings settings = new UI5ProjectTemplateGenerator.UI5ProjectSettings();
     private final java.util.List<WebProjectGenerator.SettingsStateListener> stateListeners = ContainerUtil.createLockFreeCopyOnWriteList();
+    private UI5ProjectTemplateGenerator.UI5ProjectSettings settings = new UI5ProjectTemplateGenerator.UI5ProjectSettings();
     private JPanel applicationTypeGroup =  new JPanel();
     private JPanel viewTypeGroup=  new JPanel();
     private ButtonGroup applicationTypeButtonGroup = new ButtonGroup();
@@ -32,8 +32,8 @@ public class UI5ProjectPeer implements WebProjectGenerator.GeneratorPeer<UI5Proj
 
     public UI5ProjectPeer(){
         initializeViews();
-
     }
+
     @NotNull
     @Override
     public JComponent getComponent() {
@@ -97,8 +97,8 @@ public class UI5ProjectPeer implements WebProjectGenerator.GeneratorPeer<UI5Proj
         else if(viewType == "JSON"){
             ui5View = new JSONView();
         }
-        settings.setUi5Library(ui5Library);
-        settings.setUi5View(ui5View);
+        settings.setLibrary(ui5Library);
+        settings.setView(ui5View);
         return settings;
     }
 
@@ -126,7 +126,6 @@ public class UI5ProjectPeer implements WebProjectGenerator.GeneratorPeer<UI5Proj
                 return button.getText();
             }
         }
-
         return null;
     }
 }
