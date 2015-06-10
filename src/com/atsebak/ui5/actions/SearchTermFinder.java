@@ -1,19 +1,11 @@
 package com.atsebak.ui5.actions;
 
 import com.intellij.openapi.editor.Editor;
+import lombok.Builder;
 
-/**
- * Created by asebak on 10/6/2014.
- */
-class SearchTermFinder {
-
-    private final SymbolExtractor symbolExtractor;
-    private final Editor editor;
-
-    public SearchTermFinder(Editor editor) {
-        this.editor = editor;
-        this.symbolExtractor = new SymbolExtractor();
-    }
+@Builder
+public class SearchTermFinder {
+    private Editor editor;
 
     String getSearchTerm() {
         if (editor == null) {
@@ -27,9 +19,9 @@ class SearchTermFinder {
                 return selectedText;
             }
         }
-        //not selected text
+
         int caretOffset = editor.getCaretModel().getOffset();
         CharSequence charsSequence = editor.getDocument().getCharsSequence();
-        return symbolExtractor.extract(charsSequence, caretOffset);
+        return SymbolExtractor.extract(charsSequence, caretOffset);
     }
 }
