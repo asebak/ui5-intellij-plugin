@@ -1,13 +1,10 @@
 package com.atsebak.ui5.actions;
 
-import com.atsebak.ui5.actions.ui.UI5ApiSearchDialog;
-import com.atsebak.ui5.actions.utils.Utils;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.DataConstants;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
-
-import java.io.File;
 
 public class UI5ApiSearch extends AnAction {
     /**
@@ -16,8 +13,8 @@ public class UI5ApiSearch extends AnAction {
      */
     @Override
     public void actionPerformed(AnActionEvent anActionEvent) {
-        Project project = Utils.projectFor(anActionEvent);
-        Editor editor = Utils.editorFor(anActionEvent);
+        Project project = (Project) anActionEvent.getDataContext().getData(DataConstants.PROJECT);
+        Editor editor = (Editor) anActionEvent.getDataContext().getData(DataConstants.EDITOR);
         if (project == null) {
             return;
         }

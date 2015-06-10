@@ -7,7 +7,7 @@ import lombok.Builder;
 public class SearchTermFinder {
     private Editor editor;
 
-    String getSearchTerm() {
+    public String getSearchTerm() {
         if (editor == null) {
             return null;
         }

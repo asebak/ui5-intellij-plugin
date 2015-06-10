@@ -2,6 +2,12 @@ package com.atsebak.ui5.actions;
 
 public final class SymbolExtractor {
 
+    /**
+     * Extracts character sequence base on the position
+     * @param charSequence
+     * @param position
+     * @return
+     */
     public static String extract(CharSequence charSequence, int position) {
         if (position > charSequence.length()) {
             throw new IllegalStateException();

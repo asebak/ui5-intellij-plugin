@@ -1,4 +1,4 @@
-package com.atsebak.ui5.actions.ui;
+package com.atsebak.ui5.actions;
 
 import com.atsebak.ui5.locale.UI5Bundle;
 import com.intellij.openapi.project.Project;

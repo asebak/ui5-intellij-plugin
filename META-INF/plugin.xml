@@ -40,7 +40,7 @@
         </action>
         <action id="UI5Search" class="com.atsebak.ui5.actions.UI5ApiSearch"
                 text="UI5 Api Search"
-                description="Search code on the openUI5 api" icon="/icons/ui5.png">
+                description="Search code on the openUI5 api" icon="/ui5.png">
             <keyboard-shortcut
                     keymap="$default"
                     first-keystroke="shift ctrl G"/>
