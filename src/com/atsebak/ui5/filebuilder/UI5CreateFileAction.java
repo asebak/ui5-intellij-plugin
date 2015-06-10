@@ -3,6 +3,7 @@ package com.atsebak.ui5.filebuilder;
 import com.atsebak.ui5.autogeneration.*;
 import com.atsebak.ui5.util.UI5Icons;
 import com.atsebak.ui5.util.Writer;
+import com.intellij.compiler.impl.CompilerUtil;
 import com.intellij.icons.AllIcons;
 import com.intellij.ide.actions.CreateFileFromTemplateAction;
 import com.intellij.ide.actions.CreateFileFromTemplateDialog;
@@ -19,6 +20,7 @@ import org.jetbrains.annotations.NonNls;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -36,7 +38,6 @@ public class UI5CreateFileAction extends CreateFileFromTemplateAction implements
 
     @Override
     protected void postProcess(final PsiFile createdElement, final String templateName, Map<String, String> customProperties) {
-        //TODO implement it as a background task
         if (templateName == "ui5.properties") {
             return;
         }
@@ -101,14 +102,13 @@ public class UI5CreateFileAction extends CreateFileFromTemplateAction implements
                     try {
                         Writer.writeToFile(controllerFile, controllerCode);
                         Writer.writeToFile(viewFile, viewCode);
+                        CompilerUtil.refreshIODirectories(Arrays.asList(controllerFile, viewFile));
                     } catch (IOException e) {
                         Messages.showErrorDialog(createdElement.getProject(), e.getMessage(), "Create File from Template");
-                        e.printStackTrace();
                     }
                 }
             }
         }, "Adding UI5 View", false, createdElement.getProject());
-//        super.postProcess(createdElement, templateName, customProperties);
     }
 
     @Override
@@ -125,6 +125,8 @@ public class UI5CreateFileAction extends CreateFileFromTemplateAction implements
                 .addKind("XML View", AllIcons.FileTypes.Xml, "ui5.view.xml")
                 .addKind("i18n", AllIcons.FileTypes.Properties, "ui5.properties");
     }
+
+
 
     @Override
     protected String getActionName(PsiDirectory directory, String newName, String templateName) {
