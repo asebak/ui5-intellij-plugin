@@ -73,15 +73,15 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
                         rootFolder.mkdir();
                         util.mkdir();
                         String mainController = Controller.getAutogenerateCode(rootName, "Main");
-                        File createFile = new File(tempProject.getAbsolutePath() + "\\" + "Index.html");
+                        File createFile = new File(tempProject.getAbsolutePath() + File.separator + "Index.html");
                         Writer.writeToFile(createFile, indexHtml);
-                        createFile = new File(tempProject.getAbsolutePath() + "\\"+ rootName + "\\"  + "Main.view." + ext);
+                        createFile = new File(tempProject.getAbsolutePath() + File.separator + rootName + File.separator  + "Main.view." + ext);
                         Writer.writeToFile(createFile, mainView);
-                        createFile = new File(tempProject.getAbsolutePath() + "\\" + rootName + "\\" + "Main.controller.js");
+                        createFile = new File(tempProject.getAbsolutePath() + File.separator + rootName + File.separator + "Main.controller.js");
                         Writer.writeToFile(createFile, mainController);
-                        createFile = new File(tempProject.getAbsolutePath() + "\\css\\" + rootName + ".css");
+                        createFile = new File(tempProject.getAbsolutePath() + File.separator + "css" + File.separator + rootName + ".css");
                         Writer.writeToFile(createFile, "");
-                        createFile = new File(tempProject.getAbsolutePath() + "\\i18n\\" + "i18n.properties");
+                        createFile = new File(tempProject.getAbsolutePath() + File.separator + "i18n" + File.separator + "i18n.properties");
                         Writer.writeToFile(createFile, "");
 
 
