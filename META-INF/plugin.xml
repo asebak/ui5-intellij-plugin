@@ -27,8 +27,11 @@
         <configurationType implementation="com.atsebak.ui5.runner.UI5RunConfigurationType"/>
     </extensions>
 
-    <project-components>
-    </project-components>
+    <application-components>
+        <component>
+            <implementation-class>com.atsebak.ui5.components.TemplateLoaderComponent</implementation-class>
+        </component>
+    </application-components>
     <actions>
         <action id="NewUI5ViewFile" class="com.atsebak.ui5.filebuilder.UI5CreateFileAction"
                 text="UI5"
