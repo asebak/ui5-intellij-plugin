@@ -1,4 +1,4 @@
-package com.atsebak.ui5.actions;
+package com.atsebak.ui5.actions.search;
 
 public final class SymbolExtractor {
 

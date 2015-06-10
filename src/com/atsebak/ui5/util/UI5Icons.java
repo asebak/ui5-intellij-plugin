@@ -6,6 +6,12 @@ import javax.swing.*;
 
 public final class UI5Icons {
     /**
+     * Private constructor
+     */
+    private UI5Icons() {
+
+    }
+    /**
      * Get the Main UI5 Icon
      * @return
      */

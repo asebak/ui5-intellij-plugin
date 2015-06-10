@@ -22,7 +22,6 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Created by asebak on 9/27/2014.
  * This is for the sub template of the project. \
  * Once the finished but is click generateProject method is called and runs a seperate process
  */

@@ -22,23 +22,17 @@
         <directoryProjectGenerator implementation="com.atsebak.ui5.projectbuilder.UI5ProjectTemplateGenerator"/>
         <projectTemplatesFactory implementation="com.atsebak.ui5.projectbuilder.UI5TemplatesFactory"/>
         <errorHandler implementation="com.intellij.diagnostic.ITNReporter"/>
-        <documentationProvider implementation="com.atsebak.ui5.providers.UI5DocumentationProvider"/>
         <programRunner implementation="com.atsebak.ui5.runner.UI5Runner"/>
         <configurationType implementation="com.atsebak.ui5.runner.UI5RunConfigurationType"/>
     </extensions>
 
-    <application-components>
-        <component>
-            <implementation-class>com.atsebak.ui5.components.TemplateLoaderComponent</implementation-class>
-        </component>
-    </application-components>
     <actions>
         <action id="NewUI5ViewFile" class="com.atsebak.ui5.filebuilder.UI5CreateFileAction"
                 text="UI5"
                 description="Create a new UI5 Component">
             <add-to-group group-id="NewGroup" anchor="before" relative-to-action="NewFromTemplate"/>
         </action>
-        <action id="UI5Search" class="com.atsebak.ui5.actions.UI5ApiSearch"
+        <action id="UI5Search" class="com.atsebak.ui5.actions.search.UI5ApiSearch"
                 text="UI5 Api Search"
                 description="Search code on the openUI5 api" icon="/ui5.png">
             <keyboard-shortcut

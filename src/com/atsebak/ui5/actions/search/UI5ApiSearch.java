@@ -1,4 +1,4 @@
-package com.atsebak.ui5.actions;
+package com.atsebak.ui5.actions.search;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;

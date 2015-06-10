@@ -19,7 +19,7 @@ public class UI5Runner extends DefaultProgramRunner {
             FileDocumentManager.getInstance().saveAllDocuments();
             final UI5RunConfiguration runProfile = (UI5RunConfiguration) runProfileRaw;
             final UI5RunnerParameters params = runProfile.getRunnerParameters();
-            BrowserLauncher.getInstance().browse(params.getUrl(), params.getNonDefaultBrowser(), env.getProject());
+            BrowserLauncher.getInstance().browse(params.getUrl(), params.getWebBrowser(), env.getProject());
             return null;
         } else {
             return super.doExecute(state, env);

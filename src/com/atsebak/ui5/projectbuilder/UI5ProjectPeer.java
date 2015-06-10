@@ -13,7 +13,6 @@ import java.awt.*;
 import java.util.Enumeration;
 
 /**
- * Created by asebak on 9/27/2014.
  * This class is responsible for the UI of the project creator
  */
 public class UI5ProjectPeer implements WebProjectGenerator.GeneratorPeer<UI5ProjectTemplateGenerator.UI5ProjectSettings> {
