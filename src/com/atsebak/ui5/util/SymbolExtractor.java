@@ -1,7 +1,13 @@
-package com.atsebak.ui5.actions.search;
+package com.atsebak.ui5.util;
 
 public final class SymbolExtractor {
 
+    /**
+     * Private constructor
+     */
+    private SymbolExtractor() {
+
+    }
     /**
      * Extracts character sequence base on the position
      * @param charSequence

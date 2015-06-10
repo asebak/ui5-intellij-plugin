@@ -18,7 +18,6 @@
     <depends>com.intellij.modules.lang</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceInterface="com.atsebak.ui5.config.UI5Settings" serviceImplementation="com.atsebak.ui5.config.UI5Settings"/>
         <directoryProjectGenerator implementation="com.atsebak.ui5.projectbuilder.UI5ProjectTemplateGenerator"/>
         <projectTemplatesFactory implementation="com.atsebak.ui5.projectbuilder.UI5TemplatesFactory"/>
         <errorHandler implementation="com.intellij.diagnostic.ITNReporter"/>

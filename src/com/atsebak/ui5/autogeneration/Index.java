@@ -1,10 +1,11 @@
 package com.atsebak.ui5.autogeneration;
 
-/**
- * Created by asebak on 9/28/2014.
- */
+import com.atsebak.ui5.config.UI5Library;
+import org.jetbrains.annotations.NotNull;
+
 public class Index extends View {
-    public String createIndexCode(UI5Library ui5Library, String rootModuleName, String intialViewExt){
-        return codeGenerator.createIndexCode(ui5Library, rootModuleName, intialViewExt);
+    @NotNull
+    public String createIndexCode(@NotNull UI5Library ui5Library, @NotNull String rootModuleName, @NotNull String initialViewExt) {
+        return getCodeGenerator().createIndexCode(ui5Library, rootModuleName, initialViewExt);
     }
 }

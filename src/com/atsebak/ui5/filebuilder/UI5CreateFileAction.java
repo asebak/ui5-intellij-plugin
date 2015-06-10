@@ -1,6 +1,7 @@
 package com.atsebak.ui5.filebuilder;
 
 import com.atsebak.ui5.autogeneration.*;
+import com.atsebak.ui5.config.UI5Library;
 import com.atsebak.ui5.util.UI5Icons;
 import com.atsebak.ui5.util.Writer;
 import com.intellij.compiler.impl.CompilerUtil;

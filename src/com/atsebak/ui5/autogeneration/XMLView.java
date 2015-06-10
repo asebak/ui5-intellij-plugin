@@ -1,8 +1,9 @@
 package com.atsebak.ui5.autogeneration;
 
-/**
- * Created by asebak on 9/28/2014.
- */
+import com.atsebak.ui5.config.UI5Library;
+import org.jetbrains.annotations.NotNull;
+
+
 public class XMLView extends View implements UI5View {
     @Override
     public String getExtension() {
@@ -10,8 +11,8 @@ public class XMLView extends View implements UI5View {
     }
 
     @Override
-    public String autogenerateCode(UI5Library ui5Library, String controllerPath) {
-        return codeGenerator.createXmlViewCode(ui5Library, controllerPath);
+    public String autogenerateCode(@NotNull UI5Library ui5Library, @NotNull String controllerPath) {
+        return getCodeGenerator().createXmlViewCode(ui5Library, controllerPath);
     }
 
 }

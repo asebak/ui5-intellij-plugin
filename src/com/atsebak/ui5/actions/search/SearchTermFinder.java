@@ -1,5 +1,6 @@
 package com.atsebak.ui5.actions.search;
 
+import com.atsebak.ui5.util.SymbolExtractor;
 import com.intellij.openapi.editor.Editor;
 import lombok.Builder;
 
