@@ -18,9 +18,8 @@ import org.jetbrains.annotations.NotNull;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-
+@Getter
 public class UI5RunConfiguration extends RunConfigurationBase {
-    @Getter
     private UI5RunnerParameters runnerParameters = new UI5RunnerParameters();
 
     protected UI5RunConfiguration(@NotNull Project project, @NotNull ConfigurationFactory factory, @NotNull String name) {
