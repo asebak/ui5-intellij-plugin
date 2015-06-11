@@ -49,7 +49,7 @@
             </constraints>
             <properties>
               <selected value="true"/>
-              <text value="Javascript"/>
+              <text value="JS"/>
             </properties>
           </component>
           <component id="99bb8" class="javax.swing.JRadioButton" binding="XMLRadioButton" default-binding="true">

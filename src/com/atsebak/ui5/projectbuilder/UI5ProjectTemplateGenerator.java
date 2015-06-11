@@ -10,7 +10,6 @@ import com.atsebak.ui5.util.UI5Icons;
 import com.atsebak.ui5.util.Writer;
 import com.intellij.ide.util.projectWizard.WebProjectTemplate;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.io.FileUtil;
@@ -44,14 +43,11 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
     @Override
     public void generateProject(@NotNull Project project, @NotNull final VirtualFile virtualFile, @NotNull final UI5ProjectSettings settings, @NotNull Module module) {
         final Index index = new Index();
-        final ProgressIndicator indicator = ProgressManager.getInstance().getProgressIndicator();
         final String ext = settings.getView().getExtension();
 
         ProgressManager.getInstance().runProcessWithProgressSynchronously(new Runnable() {
             @Override
             public void run() {
-                indicator.setIndeterminate(true);
-                indicator.setText(UI5Bundle.getString("project.creating"));
                 String rootName = virtualFile.getNameWithoutExtension().toLowerCase().replace(" ", "");
                 String indexHtml = index.createIndexCode(settings.getLibrary(), rootName, ext);
                 try {

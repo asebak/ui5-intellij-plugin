@@ -56,7 +56,7 @@ public class ProjectPeer implements WebProjectGenerator.GeneratorPeer<UI5Project
     public UI5ProjectTemplateGenerator.UI5ProjectSettings getSettings() {
 
         String appType = getSelectedButton(applicationTypeButtonGroup).toUpperCase();
-        String viewType = getSelectedButton(viewTypeButtonGroup).toUpperCase();
+        String viewType = getSelectedButton(viewTypeButtonGroup);
         UI5Library library = UI5Library.valueOf(appType);
         UI5View view = UI5FileBuilder.getViewImplementation(UI5Type.valueOf(viewType));
 
@@ -82,7 +82,13 @@ public class ProjectPeer implements WebProjectGenerator.GeneratorPeer<UI5Project
         stateListeners.add(settingsStateListener);
     }
 
-    public String getSelectedButton(ButtonGroup buttonGroup) {
+    /**
+     * Gets the selected button on the UI
+     *
+     * @param buttonGroup
+     * @return
+     */
+    public String getSelectedButton(@NotNull ButtonGroup buttonGroup) {
         for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements(); ) {
             AbstractButton button = buttons.nextElement();
 
