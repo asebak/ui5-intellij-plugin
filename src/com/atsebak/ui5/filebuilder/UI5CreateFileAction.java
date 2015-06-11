@@ -13,7 +13,6 @@ public class UI5CreateFileAction extends AnAction {
     public void actionPerformed(AnActionEvent anActionEvent) {
         final DataContext dataContext = anActionEvent.getDataContext();
 
-        Project data = LangDataKeys.PROJECT_CONTEXT.getData(dataContext);
         final IdeView view = LangDataKeys.IDE_VIEW.getData(dataContext);
         if (view == null) {
             return;
