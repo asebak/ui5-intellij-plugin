@@ -17,6 +17,7 @@ import java.net.URL;
 
 @Builder
 public class UI5ApiSearchDialog {
+    private final static String API_PAGE = "https://sapui5.netweaver.ondemand.com/sdk/search.html?q=";
     private Project project;
 
     /**
@@ -49,7 +50,7 @@ public class UI5ApiSearchDialog {
         return new AbstractAction(UI5Bundle.getString("search")) {
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
-                    Desktop.getDesktop().browse(new URL("https://sapui5.netweaver.ondemand.com/sdk/search.html?q=" + term).toURI());
+                    Desktop.getDesktop().browse(new URL(API_PAGE + term).toURI());
                 } catch (Exception e) {
                     Messages.showErrorDialog(project, UI5Bundle.getString("search.error.msg"), UI5Bundle.getString("search.error.title"));
                 }

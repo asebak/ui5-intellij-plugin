@@ -44,7 +44,7 @@ public final class CodeGenerator {
                 "\t\t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n" +
                 "\t\t<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'/>");
         switch (ui5Library){
-            case Desktop:
+            case DESKTOP:
                 sb.append("\n<script src=\"https://openui5.hana.ondemand.com/resources/sap-ui-core.js\"\n" +
                         "\t\t\t\tid=\"sap-ui-bootstrap\"\n" +
                         "\t\t\t\tdata-sap-ui-libs=\"sap.ui.commons,sap.ui.table,sap.ui.ux3\"\n" +
@@ -59,7 +59,7 @@ public final class CodeGenerator {
                         "\t\t\t\tview.placeAt(\"content\");\n" +
                         "\t\t</script>");
                 break;
-            case Mobile:
+            case MOBILE:
                 sb.append("\n<script src=\"https://openui5.hana.ondemand.com/resources/sap-ui-core.js\"\n" +
                         "\t\t\t\tid=\"sap-ui-bootstrap\"\n" +
                         "\t\t\t\tdata-sap-ui-libs=\"sap.m\"\n" +
@@ -89,9 +89,7 @@ public final class CodeGenerator {
         sb = new StringBuilder();
         sb.append("<template data-controller-name='").append(controllerPath).append("'>");
         switch (ui5Library){
-            case Desktop:
-                break;
-            case Mobile:
+            case MOBILE:
                 sb.append("\t<div data-sap-ui-type=\"sap.m.Page\" data-title=\"Title\">\n" +
                         "\t\t\n<div data-sap-ui-aggregation=\"content\">\n" +
                         "\t\t\n" +
@@ -116,9 +114,7 @@ public final class CodeGenerator {
                         "\t* @memberOf ").append(controllerPath)
                 .append("**/ \n \tcreateContent : function(oController) {\n");
         switch (ui5Library){
-            case Desktop:
-                break;
-            case Mobile:
+            case MOBILE:
                 sb.append(" \t\treturn new sap.m.Page({\n" +
                         "\t\t\ttitle: \"Title\",\n" +
                         "\t\t\tcontent: [\n" +
@@ -135,14 +131,13 @@ public final class CodeGenerator {
 
     public String createXmlViewCode(UI5Library ui5Library, String controllerPath) {
         sb = new StringBuilder();
-        String xmlns;
         switch (ui5Library){
-            case Desktop:
+            case DESKTOP:
                 sb.append("<core:View xmlns:core=\"sap.ui.core\" xmlns:mvc=\"sap.ui.core.mvc\" xmlns=\"sap.ui.commons\"")
                         .append(" controllerName='").append(controllerPath).append("'").append(" xmlns:html=\"http://www.w3.org/1999/xhtml\">\n" +
                         "</core:View>");
                 break;
-            case Mobile:
+            case MOBILE:
                 sb.append("<core:View xmlns:core=\"sap.ui.core\" xmlns:mvc=\"sap.ui.core.mvc\" xmlns=\"sap.m\"")
                         .append(" controllerName='").append(controllerPath).append("'").append(" xmlns:html=\"http://www.w3.org/1999/xhtml\">\n" +
                         "\t<Page title=\"Title\">\n" +
@@ -162,9 +157,7 @@ public final class CodeGenerator {
                 "\t\"Type\":\"sap.ui.core.mvc.JSONView\",\n" +
                 "\t\"controllerName\":\"").append(controllerPath).append("\",\n\t\"content\": [{\n");
         switch (ui5Library){
-            case Desktop:
-                break;
-            case Mobile:
+            case MOBILE:
                 sb.append("\t\"Type\":\"sap.m.Page\",\n" +
                         "\t\t\"title\":\"Title\",\n" +
                         "\t\t\"content\":[\n" +

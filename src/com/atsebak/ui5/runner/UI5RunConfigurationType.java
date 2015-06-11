@@ -1,5 +1,6 @@
 package com.atsebak.ui5.runner;
 
+import com.atsebak.ui5.locale.UI5Bundle;
 import com.atsebak.ui5.util.UI5Icons;
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.ConfigurationType;
@@ -10,10 +11,10 @@ import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
 
 public class UI5RunConfigurationType implements ConfigurationType {
-    private ConfigurationFactory myConfigurationFactory;
+    private ConfigurationFactory configurationFactory;
 
     public UI5RunConfigurationType() {
-        myConfigurationFactory = new ConfigurationFactory(this) {
+        configurationFactory = new ConfigurationFactory(this) {
             public RunConfiguration createTemplateConfiguration(Project project) {
                 return new UI5RunConfiguration(project, this, "OpenUI5");
             }
@@ -21,11 +22,11 @@ public class UI5RunConfigurationType implements ConfigurationType {
     }
 
     public String getDisplayName() {
-        return "OpenUI5";
+        return "Open UI5";
     }
 
     public String getConfigurationTypeDescription() {
-        return "Run an OpenUI5 App";
+        return UI5Bundle.getString("run.app");
     }
 
     public Icon getIcon() {
@@ -38,6 +39,6 @@ public class UI5RunConfigurationType implements ConfigurationType {
     }
 
     public ConfigurationFactory[] getConfigurationFactories() {
-        return new ConfigurationFactory[]{myConfigurationFactory};
+        return new ConfigurationFactory[]{configurationFactory};
     }
 }

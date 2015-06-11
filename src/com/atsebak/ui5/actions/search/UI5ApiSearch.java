@@ -2,7 +2,8 @@ package com.atsebak.ui5.actions.search;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DataConstants;
+import com.intellij.openapi.actionSystem.CommonDataKeys;
+import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 
@@ -13,8 +14,9 @@ public class UI5ApiSearch extends AnAction {
      */
     @Override
     public void actionPerformed(AnActionEvent anActionEvent) {
-        Project project = (Project) anActionEvent.getDataContext().getData(DataConstants.PROJECT);
-        Editor editor = (Editor) anActionEvent.getDataContext().getData(DataConstants.EDITOR);
+        final DataContext dataContext = anActionEvent.getDataContext();
+        final Project project = CommonDataKeys.PROJECT.getData(dataContext);
+        Editor editor = CommonDataKeys.EDITOR.getData(dataContext);
         if (project == null) {
             return;
         }
