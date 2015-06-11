@@ -1,5 +1,6 @@
 package com.atsebak.ui5.runner;
 
+import com.atsebak.ui5.locale.UI5Bundle;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configuration.EmptyRunProfileState;
@@ -10,18 +11,30 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.WriteExternalException;
 import com.intellij.util.xmlb.XmlSerializer;
+import lombok.Getter;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
-
+@Getter
 public class UI5RunConfiguration extends RunConfigurationBase {
-    private UI5RunnerParameters myRunnerParameters = new UI5RunnerParameters();
+    private UI5RunnerParameters runnerParameters = new UI5RunnerParameters();
 
-    protected UI5RunConfiguration(Project project, ConfigurationFactory factory, String name) {
+    protected UI5RunConfiguration(@NotNull Project project, @NotNull ConfigurationFactory factory, @NotNull String name) {
         super(project, factory, name);
+    }
+
+    public static void checkURL(String url) throws RuntimeConfigurationException {
+        try {
+            if (url == null) {
+                throw new MalformedURLException(UI5Bundle.getString("url.invalid"));
+            }
+            new URL(url);
+        } catch (MalformedURLException ignored) {
+            throw new RuntimeConfigurationError(UI5Bundle.getString("url.exception"));
+        }
     }
 
     @NotNull
@@ -37,15 +50,15 @@ public class UI5RunConfiguration extends RunConfigurationBase {
     @Override
     public void readExternal(Element element) throws InvalidDataException {
         super.readExternal(element);
-        myRunnerParameters = createRunnerParametersInstance();
-        XmlSerializer.deserializeInto(myRunnerParameters, element);
+        runnerParameters = createRunnerParametersInstance();
+        XmlSerializer.deserializeInto(runnerParameters, element);
     }
 
     @Override
     public void writeExternal(Element element) throws WriteExternalException {
         super.writeExternal(element);
-        if (myRunnerParameters != null) {
-            XmlSerializer.serializeInto(myRunnerParameters, element);
+        if (runnerParameters != null) {
+            XmlSerializer.serializeInto(runnerParameters, element);
         }
     }
 
@@ -54,24 +67,9 @@ public class UI5RunConfiguration extends RunConfigurationBase {
         return EmptyRunProfileState.INSTANCE;
     }
 
-    public static void checkURL(String url) throws RuntimeConfigurationException {
-        // check URL for correctness
-        try {
-            if (url == null) {
-                throw new MalformedURLException("No start file specified or this file is invalid");
-            }
-            new URL(url);
-        } catch (MalformedURLException ignored) {
-            throw new RuntimeConfigurationError("Incorrect URL");
-        }
-    }
-
     @Override
     public void checkConfiguration() throws RuntimeConfigurationException {
-        checkURL(myRunnerParameters.getUrl());
+        checkURL(runnerParameters.getUrl());
     }
 
-    public UI5RunnerParameters getRunnerParameters() {
-        return myRunnerParameters;
-    }
 }

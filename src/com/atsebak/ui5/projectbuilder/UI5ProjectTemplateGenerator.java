@@ -89,8 +89,8 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
 
     @NotNull
     @Override
-    public UI5ProjectPeer createPeer() {
-        return new UI5ProjectPeer();
+    public ProjectPeer createPeer() {
+        return new ProjectPeer();
     }
 
     private void createPaths(@NotNull File tempDir, @NotNull String[] paths) {
