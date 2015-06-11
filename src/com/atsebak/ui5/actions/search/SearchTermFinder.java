@@ -9,9 +9,6 @@ public class SearchTermFinder {
     private Editor editor;
 
     public String getSearchTerm() {
-        if (editor == null) {
-            return null;
-        }
         String selectedText = editor.getSelectionModel().getSelectedText();
         if (selectedText != null && selectedText.length() != 0) {
             if (selectedText.contains("\n")) {
