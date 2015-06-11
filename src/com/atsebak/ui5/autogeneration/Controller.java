@@ -6,6 +6,6 @@ public class Controller {
 
     @NotNull
     public static String getAutogenerateCode(@NotNull String modulePath, @NotNull String controllerName) {
-        return new CodeGenerator().createControllerCode(modulePath, controllerName);
+        return new CodeGenerator().createControllerCode(modulePath + "." + controllerName);
     }
 }

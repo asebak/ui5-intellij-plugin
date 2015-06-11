@@ -27,6 +27,6 @@ public class HTMLViewTest {
         UI5View htmlView = new HTMLView();
         String s = htmlView.autogenerateCode(UI5Library.MOBILE, "com.atsebak");
         assertThat(s.contains("<template data-controller-name='com.atsebak'"), is(true));
-        assertThat(s.contains("<div data-sap-ui-type=\"sap.m.Page\" data-title=\"Title\">"), is(true));
+        assertThat(s.contains("<div data-sap-ui-type='sap.m.Page' data-title='Title'>"), is(true));
     }
 }
