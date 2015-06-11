@@ -32,7 +32,7 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
     @NotNull
     @Override
     public String getName() {
-        return "App";
+        return UI5Bundle.getString("app");
     }
 
     @Override
