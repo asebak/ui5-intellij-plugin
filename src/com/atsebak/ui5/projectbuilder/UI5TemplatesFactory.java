@@ -15,7 +15,7 @@ public class UI5TemplatesFactory extends ProjectTemplatesFactory {
     @NotNull
     @Override
     public String[] getGroups() {
-        return new String[]{"OpenUI5"};
+        return new String[]{"SAP UI5"};
     }
 
     @Override
@@ -26,6 +26,6 @@ public class UI5TemplatesFactory extends ProjectTemplatesFactory {
     @NotNull
     @Override
     public ProjectTemplate[] createTemplates(String s, WizardContext wizardContext) {
-        return new ProjectTemplate[]{new UI5ProjectTemplateGenerator()};
+        return new ProjectTemplate[]{new DesktopTemplateGenerator(), new MobileTemplateGenerator()};
     }
 }

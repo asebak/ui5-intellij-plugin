@@ -29,7 +29,7 @@ public final class CodeGenerator {
         return Template.builder().name(templateLocation).classContext(this.getClass())
                 .data(new HashMap<String, Object>() {{
                     put("rootModuleName", rootModuleName);
-                    put("intialViewExt", intialViewExt);
+                    put("intialViewExt", intialViewExt.toUpperCase());
                 }})
                 .build()
                 .toString();
