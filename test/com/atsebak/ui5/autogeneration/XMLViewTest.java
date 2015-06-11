@@ -19,14 +19,14 @@ public class XMLViewTest {
     public void testAutogenerateCodeForDesktop() {
         UI5View view = new XMLView();
         String s = view.autogenerateCode(UI5Library.DESKTOP, "com.atsebak");
-        assertThat(s.contains("<core:View xmlns:core=\"sap.ui.core\" xmlns:mvc=\"sap.ui.core.mvc\" xmlns=\"sap.ui.commons\" controllerName='com.atsebak' xmlns:html=\"http://www.w3.org/1999/xhtml\">"), is(true));
+        assertThat(s.contains("<core:View xmlns:core=\"sap.ui.core\" xmlns=\"sap.ui.commons\" controllerName='com.atsebak'>"), is(true));
     }
 
     @Test
     public void testAutogenerateCodeForMobile() {
         UI5View view = new XMLView();
         String s = view.autogenerateCode(UI5Library.MOBILE, "com.atsebak");
-        assertThat(s.contains("<core:View xmlns:core=\"sap.ui.core\" xmlns:mvc=\"sap.ui.core.mvc\" xmlns=\"sap.m\" controllerName='com.atsebak' xmlns:html=\"http://www.w3.org/1999/xhtml\">"), is(true));
+        assertThat(s.contains("<core:View xmlns:core=\"sap.ui.core\" xmlns=\"sap.m\" controllerName='com.atsebak'>"), is(true));
         assertThat(s.contains("<Page title=\"Title\">"), is(true));
     }
 }
