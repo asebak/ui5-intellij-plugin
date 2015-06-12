@@ -4,6 +4,7 @@ import com.atsebak.ui5.locale.UI5Bundle;
 import com.atsebak.ui5.util.UI5Icons;
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.ConfigurationType;
+import com.intellij.execution.configurations.ConfigurationTypeUtil;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
@@ -19,6 +20,10 @@ public class UI5RunConfigurationType implements ConfigurationType {
                 return new UI5RunConfiguration(project, this, "OpenUI5");
             }
         };
+    }
+
+    public static UI5RunConfigurationType getInstance() {
+        return ConfigurationTypeUtil.findConfigurationType(UI5RunConfigurationType.class);
     }
 
     public String getDisplayName() {
@@ -40,5 +45,9 @@ public class UI5RunConfigurationType implements ConfigurationType {
 
     public ConfigurationFactory[] getConfigurationFactories() {
         return new ConfigurationFactory[]{configurationFactory};
+    }
+
+    public ConfigurationFactory getFactory() {
+        return configurationFactory;
     }
 }

@@ -5,6 +5,7 @@ import com.atsebak.ui5.autogeneration.Index;
 import com.atsebak.ui5.autogeneration.UI5View;
 import com.atsebak.ui5.config.UI5Library;
 import com.atsebak.ui5.locale.UI5Bundle;
+import com.atsebak.ui5.util.ProjectHelper;
 import com.atsebak.ui5.util.UI5FileBuilder;
 import com.atsebak.ui5.util.UI5Icons;
 import com.atsebak.ui5.util.Writer;
@@ -18,6 +19,7 @@ import lombok.Data;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.zeroturnaround.zip.ZipUtil;
 
 import javax.swing.*;
 import java.io.File;
@@ -41,7 +43,7 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
     }
 
     @Override
-    public void generateProject(@NotNull Project project, @NotNull final VirtualFile virtualFile, @NotNull final UI5ProjectSettings settings, @NotNull Module module) {
+    public void generateProject(@NotNull final Project project, @NotNull final VirtualFile virtualFile, @NotNull final UI5ProjectSettings settings, @NotNull Module module) {
         final Index index = new Index();
         final String ext = settings.getView().getExtension();
 
@@ -53,7 +55,7 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
                 try {
                     File tempProject = createTemp();
                     String mainView = settings.getView().autogenerateCode(settings.getLibrary(), rootName + ".Main");
-                    createPaths(tempProject, new String[]{"i18n", "css", "util", rootName});
+                    createPaths(tempProject, new String[]{"i18n", "css", "util", rootName, "resources"});
                     String mainController = new Controller().getAutogenerateCode(rootName, "Main");
 
                     writeToFile(tempProject, "", "Index.html", indexHtml);
@@ -62,7 +64,12 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
                     writeToFile(tempProject, "css", rootName + ".css", "");
                     writeToFile(tempProject, "i18n", "i18n.properties", "");
 
+                    ZipUtil.unpack(getClass().getResourceAsStream("/ui5/resources.zip"), new File(tempProject.getAbsolutePath() + File.separator + "resources"));
+
                     transferTempFilesToProject(tempProject, virtualFile);
+
+                    ProjectHelper.addRunConfiguration(project);
+
                 } catch (Exception e) {
                     throw new RuntimeException(e.getMessage(), e);
                 }
@@ -112,5 +119,6 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
         private UI5View view;
         private UI5Library library;
     }
+
 }
 

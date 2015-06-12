@@ -1,7 +1,7 @@
 <idea-plugin version="2">
     <id>com.atsebak.ui5</id>
     <name>SAP/Open UI5</name>
-    <version>2.11</version>
+    <version>2.12</version>
     <vendor email="ahmad@atsebak.com" url="http://www.atsebak.com">At Sebak</vendor>
 
     <description><![CDATA[
@@ -10,6 +10,18 @@
     ]]></description>
 
     <change-notes><![CDATA[
+    <b>Version 2.12</b>
+        <ul>
+            <li>
+                Added autocomplete functionality.
+            </li>
+            <li>
+                SAP UI5 resource files are added once project is created.
+            <li>
+            <li>
+                SAP UI5 run configuration is added once project is created.
+            </li>
+        </ul>
     <b>Version 2.11</b>
         <ul>
             <li>

@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv='Content-Type' content='text/html;charset=UTF-8'/>
-    <script src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js" id="sap-ui-bootstrap"
+    <script src="resources/sap-ui-core.js" id="sap-ui-bootstrap"
             data-sap-ui-libs="sap.m" data-sap-ui-theme="sap_bluecrystal">
     </script>
     <script>
