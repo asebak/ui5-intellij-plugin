@@ -28,10 +28,8 @@ public class UI5Runner extends DefaultProgramRunner {
             BuiltInServerManager serverManager = BuiltInServerManager.getInstance().waitForStart();
             BrowserLauncher.getInstance().browse("http://localhost:" + serverManager.getPort()
                     + getClientApplicationPath(env.getProject()), params.getWebBrowser(), env.getProject());
-            return null;
-        } else {
-            return super.doExecute(state, env);
         }
+        return super.doExecute(state, env);
     }
 
     @Override
