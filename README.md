@@ -9,7 +9,7 @@ http://plugins.jetbrains.com/plugin/7591
 
 ##### Checking out and Building
 
-Configure your Intellij environment using the following link: https://www.jetbrains.com/idea/help/configuring-intellij-platform-plugin-sdk.html
+Configure your Intellij environment using the following link:  https://www.jetbrains.com/idea/help/configuring-intellij-platform-plugin-sdk.html
 
 You can build the project directly from IDEA.  Continous Integration script can be executed using:
 ```sh
@@ -18,19 +18,17 @@ $ sudo sh ./ci-build.sh
 
 ##### Extension Overview
 ```
-This extension allows you to create basic SAP UI5 Apps
-that will run inside of any IDEA product(Intellij, Webstorm, etc).
-It contains a project template that will allow you to create either 
-a desktop or mobile HTML5 application for the SAP UI5 framework. 
+This extension allows support for creating SAP UI5 Apps
+that can run inside of IDEA products (Intellij, Webstorm, etc).
 ```
 
 ##### Features
 ```
-- Desktop or Mobile Application Creation project template
-- I18n Properties project item template
-- OpenUI5 View Templates (XML, HTML, JSON, JS) item template
-- Run Configurations 
-- OpenUI5 Api Documentation Searching
+- Desktop or Mobile Application project templates.
+- i18n Properties file template.
+- View Templates (XML, HTML, JSON, JS) file templates.
+- Run Configurations to run static web content without a java webserver.
+- Api Documentation Searching
 ```
 ![ScreenShot](https://raw.githubusercontent.com/asebak/UI5-IntelliJ-Plugin/master/Resources/diagrams/ui5app.png)
 ![ScreenShot](https://raw.githubusercontent.com/asebak/UI5-IntelliJ-Plugin/master/Resources/diagrams/ui5config.png)
