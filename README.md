@@ -29,6 +29,7 @@ that can run inside of IDEA products (Intellij, Webstorm, etc).
 - View Templates (XML, HTML, JSON, JS) file templates.
 - Run Configurations to run static web content without a java webserver.
 - Api Documentation Searching
+- Autocomplete functionality based on static imported resources.
 ```
 ![ScreenShot](https://raw.githubusercontent.com/asebak/UI5-IntelliJ-Plugin/master/Resources/diagrams/ui5app.png)
 ![ScreenShot](https://raw.githubusercontent.com/asebak/UI5-IntelliJ-Plugin/master/Resources/diagrams/ui5config.png)
