@@ -33,6 +33,4 @@ a desktop or mobile HTML5 application for the SAP UI5 framework.
 - OpenUI5 Api Documentation Searching
 ```
 ![ScreenShot](https://raw.githubusercontent.com/asebak/UI5-IntelliJ-Plugin/master/Resources/diagrams/ui5app.png)
-![ScreenShot](https://raw.githubusercontent.com/asebak/UI5-IntelliJ-Plugin/master/Resources/diagrams/ui5apisearch.png)
-![ScreenShot](https://raw.githubusercontent.com/asebak/UI5-IntelliJ-Plugin/master/Resources/diagrams/ui5file.png)
 ![ScreenShot](https://raw.githubusercontent.com/asebak/UI5-IntelliJ-Plugin/master/Resources/diagrams/ui5config.png)
