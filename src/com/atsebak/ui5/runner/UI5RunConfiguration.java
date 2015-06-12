@@ -69,7 +69,7 @@ public class UI5RunConfiguration extends RunConfigurationBase {
 
     @Override
     public void checkConfiguration() throws RuntimeConfigurationException {
-        checkURL(runnerParameters.getUrl());
+//        checkURL(runnerParameters.getUrl());
     }
 
 }

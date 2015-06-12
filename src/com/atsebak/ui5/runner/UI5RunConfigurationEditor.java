@@ -24,10 +24,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class UI5RunConfigurationEditor extends SettingsEditor<UI5RunConfiguration> {
-    private JPanel myMainPanel;
-    private JTextField myWebPathField;
-    private JPanel myBrowserSelectorPanel;
     private final BrowserSelector myBrowserSelector;
+    private JPanel myMainPanel;
+    private JPanel myBrowserSelectorPanel;
 
     public UI5RunConfigurationEditor() {
         myBrowserSelector = new BrowserSelector();
@@ -37,14 +36,12 @@ public class UI5RunConfigurationEditor extends SettingsEditor<UI5RunConfiguratio
     @Override
     protected void resetEditorFrom(UI5RunConfiguration s) {
         UI5RunnerParameters params = s.getRunnerParameters();
-        myWebPathField.setText(params.getUrl());
         myBrowserSelector.setSelected(params.getWebBrowser() != null ? params.getWebBrowser() : null);
     }
 
     @Override
     protected void applyEditorTo(UI5RunConfiguration s) throws ConfigurationException {
         UI5RunnerParameters params = s.getRunnerParameters();
-        params.setUrl(myWebPathField.getText());
         params.setWebBrowser(myBrowserSelector.getSelected());
     }
 
