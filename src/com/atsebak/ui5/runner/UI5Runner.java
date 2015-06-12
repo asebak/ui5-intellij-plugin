@@ -7,7 +7,6 @@ import com.intellij.execution.executors.DefaultRunExecutor;
 import com.intellij.execution.runners.DefaultProgramRunner;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.ui.RunContentDescriptor;
-import com.intellij.ide.browsers.BrowserLauncher;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import org.jetbrains.annotations.NotNull;
 
@@ -19,7 +18,8 @@ public class UI5Runner extends DefaultProgramRunner {
             FileDocumentManager.getInstance().saveAllDocuments();
             final UI5RunConfiguration runProfile = (UI5RunConfiguration) runProfileRaw;
             final UI5RunnerParameters params = runProfile.getRunnerParameters();
-            BrowserLauncher.getInstance().browse(params.getUrl(), params.getWebBrowser(), env.getProject());
+//            AnActionEvent event, @Nullable WebBrowser browser
+//            BrowserLauncher.getInstance().browse(params.getUrl(), params.getWebBrowser(), env.getProject());
             return null;
         } else {
             return super.doExecute(state, env);
