@@ -14,7 +14,7 @@ public class ControllerTest {
 
     @Test
     public void testGetAutogenerateCode() throws Exception {
-        String controller = Controller.getAutogenerateCode("com.atsebak", "Main").replaceAll("^\\s+|\\s+$|\\s*(\n)\\s*|(\\s)\\s*", "$1$2").replace("\t", " ");
+        String controller = new Controller().getAutogenerateCode("com.atsebak", "Main").replaceAll("^\\s+|\\s+$|\\s*(\n)\\s*|(\\s)\\s*", "$1$2").replace("\t", " ");
         String controllerName = controller.substring(0, Math.min(controller.length(), 37));
         assertEquals(controllerName, "sap.ui.controller('com.atsebak.Main',");
         assertThat(getFrequencyCharCount(controller, ';'), is(1));
