@@ -2,10 +2,17 @@ package com.atsebak.ui5.autogeneration;
 
 import org.jetbrains.annotations.NotNull;
 
-public class Controller {
+public class Controller extends View {
 
+    /**
+     * generates code for the controller
+     *
+     * @param modulePath
+     * @param controllerName
+     * @return
+     */
     @NotNull
-    public static String getAutogenerateCode(@NotNull String modulePath, @NotNull String controllerName) {
-        return new CodeGenerator().createControllerCode(modulePath + "." + controllerName);
+    public String getAutogenerateCode(@NotNull String modulePath, @NotNull String controllerName) {
+        return getCodeGenerator().createControllerCode(modulePath + "." + controllerName);
     }
 }

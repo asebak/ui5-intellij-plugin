@@ -82,7 +82,7 @@ public class CreateFileDialog extends DialogWrapper {
                 String modulePath = UI5FileBuilder.getModulePath(psiDirectory);
 
                 String viewCode = ui5View.autogenerateCode(UI5Library.DESKTOP, modulePath + "." + fileNameWithOutExt);
-                String controllerCode = Controller.getAutogenerateCode(modulePath, fileNameWithOutExt);
+                String controllerCode = new Controller().getAutogenerateCode(modulePath, fileNameWithOutExt);
 
                 Writer.writeToFile(controllerFile, controllerCode);
                 Writer.writeToFile(viewFile, viewCode);

@@ -1,12 +1,19 @@
 package com.atsebak.ui5.autogeneration;
 
 import com.atsebak.ui5.config.UI5Library;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
 public final class CodeGenerator {
 
-    public String createControllerCode(final String root) {
+    /**
+     * Controller.js code
+     *
+     * @param root
+     * @return
+     */
+    public String createControllerCode(@NotNull final String root) {
         return Template.builder().name("templates/controller.js.ftl").classContext(this.getClass())
                 .data(new HashMap<String, Object>() {{
                     put("root", root);
@@ -15,7 +22,15 @@ public final class CodeGenerator {
                 .toString();
     }
 
-    public String createIndexCode(UI5Library ui5Library, final String rootModuleName, final String intialViewExt) {
+    /**
+     * Index.html code
+     *
+     * @param ui5Library
+     * @param rootModuleName
+     * @param intialViewExt
+     * @return
+     */
+    public String createIndexCode(@NotNull UI5Library ui5Library, @NotNull final String rootModuleName, @NotNull final String intialViewExt) {
         String templateLocation = "";
         switch (ui5Library) {
             case DESKTOP:
@@ -35,23 +50,59 @@ public final class CodeGenerator {
                 .toString();
     }
 
-    public String createHtmlViewCode(UI5Library ui5Library, String controllerPath) {
+    /**
+     * HTML Code
+     *
+     * @param ui5Library
+     * @param controllerPath
+     * @return
+     */
+    public String createHtmlViewCode(@NotNull UI5Library ui5Library, @NotNull String controllerPath) {
         return getGeneratedCodeForView(ui5Library, controllerPath, "html");
     }
 
-    public String createJavascriptViewCode(UI5Library ui5Library, String controllerPath){
+    /**
+     * JS Code
+     *
+     * @param ui5Library
+     * @param controllerPath
+     * @return
+     */
+    public String createJavascriptViewCode(@NotNull UI5Library ui5Library, @NotNull String controllerPath){
         return getGeneratedCodeForView(ui5Library, controllerPath, "js");
     }
 
-    public String createXmlViewCode(UI5Library ui5Library, String controllerPath) {
+    /**
+     * XML Code
+     *
+     * @param ui5Library
+     * @param controllerPath
+     * @return
+     */
+    public String createXmlViewCode(@NotNull UI5Library ui5Library, @NotNull String controllerPath) {
         return getGeneratedCodeForView(ui5Library, controllerPath, "xml");
     }
 
-    public String createJsonViewCode(UI5Library ui5Library, String controllerPath) {
+    /**
+     * JSON Code
+     *
+     * @param ui5Library
+     * @param controllerPath
+     * @return
+     */
+    public String createJsonViewCode(@NotNull UI5Library ui5Library,@NotNull String controllerPath) {
         return getGeneratedCodeForView(ui5Library, controllerPath, "json");
     }
 
-    private String getGeneratedCodeForView(UI5Library ui5Library, final String controllerPath, String ext) {
+    /**
+     * Generic method to autogenerate code based on file template extension
+     *
+     * @param ui5Library
+     * @param controllerPath
+     * @param ext
+     * @return
+     */
+    private String getGeneratedCodeForView(@NotNull UI5Library ui5Library, @NotNull final String controllerPath,@NotNull String ext) {
         String templateLocation = "";
         switch (ui5Library) {
             case DESKTOP:

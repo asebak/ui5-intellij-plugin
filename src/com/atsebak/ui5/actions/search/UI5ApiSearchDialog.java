@@ -24,7 +24,7 @@ public class UI5ApiSearchDialog {
      * Show the search dialog
      * @param searchTerm
      */
-    public void show(final String searchTerm) {
+    public void show(@Nullable final String searchTerm) {
 
         final JTextField searchTextField = new JTextField(searchTerm);
 

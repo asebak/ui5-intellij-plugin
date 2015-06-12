@@ -54,7 +54,7 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
                     File tempProject = createTemp();
                     String mainView = settings.getView().autogenerateCode(settings.getLibrary(), rootName + ".Main");
                     createPaths(tempProject, new String[]{"i18n", "css", "util", rootName});
-                    String mainController = Controller.getAutogenerateCode(rootName, "Main");
+                    String mainController = new Controller().getAutogenerateCode(rootName, "Main");
 
                     writeToFile(tempProject, "", "Index.html", indexHtml);
                     writeToFile(tempProject, rootName, "Main.view." + ext, mainView);
