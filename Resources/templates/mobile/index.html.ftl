@@ -20,8 +20,8 @@
     </script>
 </head>
 <body class="sapUiBody" role="application">
-<div id="content">
+    <div id="content">
 
-</div>
+    </div>
 </body>
 </html>
