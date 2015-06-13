@@ -11,8 +11,10 @@ import com.atsebak.ui5.util.UI5Icons;
 import com.atsebak.ui5.util.Writer;
 import com.intellij.ide.util.projectWizard.WebProjectTemplate;
 import com.intellij.openapi.module.Module;
+import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import lombok.Data;
@@ -44,12 +46,17 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
 
     @Override
     public void generateProject(@NotNull final Project project, @NotNull final VirtualFile virtualFile, @NotNull final UI5ProjectSettings settings, @NotNull Module module) {
+        if(settings.getLibrary() == null) {
+            settings.setLibrary(UI5Library.DESKTOP);
+        }
         final Index index = new Index();
         final String ext = settings.getView().getExtension();
 
         ProgressManager.getInstance().runProcessWithProgressSynchronously(new Runnable() {
             @Override
             public void run() {
+                ProgressIndicator progressIndicator = ProgressManager.getInstance().getProgressIndicator();
+                progressIndicator.setText(UI5Bundle.getString("app.creating.long"));
                 String rootName = virtualFile.getNameWithoutExtension().toLowerCase().replace(" ", "");
                 String indexHtml = index.createIndexCode(settings.getLibrary(), rootName, ext);
                 try {
@@ -70,8 +77,9 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
 
                     ProjectHelper.addRunConfiguration(project);
 
+
                 } catch (Exception e) {
-                    throw new RuntimeException(e.getMessage(), e);
+                    Messages.showErrorDialog(project, e.getMessage(), "");
                 }
             }
         }, UI5Bundle.getString("project.creating"), false, project);
