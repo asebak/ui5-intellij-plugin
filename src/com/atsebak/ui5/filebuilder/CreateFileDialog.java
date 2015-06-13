@@ -110,7 +110,7 @@ public class CreateFileDialog extends DialogWrapper {
         if (!StringUtils.isNotBlank(name.getText())) {
             return new ValidationInfo(UI5Bundle.getString("view.noname"), name);
         }
-        return null;
+        return super.doValidate();
     }
 
 

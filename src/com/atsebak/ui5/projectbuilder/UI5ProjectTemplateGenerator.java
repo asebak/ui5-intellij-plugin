@@ -5,10 +5,7 @@ import com.atsebak.ui5.autogeneration.Index;
 import com.atsebak.ui5.autogeneration.UI5View;
 import com.atsebak.ui5.config.UI5Library;
 import com.atsebak.ui5.locale.UI5Bundle;
-import com.atsebak.ui5.util.ProjectHelper;
-import com.atsebak.ui5.util.UI5FileBuilder;
-import com.atsebak.ui5.util.UI5Icons;
-import com.atsebak.ui5.util.Writer;
+import com.atsebak.ui5.util.*;
 import com.intellij.ide.util.projectWizard.WebProjectTemplate;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.progress.ProgressIndicator;
@@ -21,7 +18,6 @@ import lombok.Data;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.zeroturnaround.zip.ZipUtil;
 
 import javax.swing.*;
 import java.io.File;
@@ -32,6 +28,7 @@ import java.io.IOException;
  * Once the finished but is click generateProject method is called and runs a seperate process
  */
 public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTemplateGenerator.UI5ProjectSettings> {
+    private static final String RESOURCE_PATH = "/ui5/resources.zip";
     @Nls
     @NotNull
     @Override
@@ -55,7 +52,7 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
         ProgressManager.getInstance().runProcessWithProgressSynchronously(new Runnable() {
             @Override
             public void run() {
-                ProgressIndicator progressIndicator = ProgressManager.getInstance().getProgressIndicator();
+                final ProgressIndicator progressIndicator =  ProgressManager.getInstance().getProgressIndicator();
                 progressIndicator.setText(UI5Bundle.getString("app.creating.long"));
                 String rootName = virtualFile.getNameWithoutExtension().toLowerCase().replace(" ", "");
                 String indexHtml = index.createIndexCode(settings.getLibrary(), rootName, ext);
@@ -71,13 +68,12 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
                     writeToFile(tempProject, "css", rootName + ".css", "");
                     writeToFile(tempProject, "i18n", "i18n.properties", "");
 
-                    ZipUtil.unpack(getClass().getResourceAsStream("/ui5/resources.zip"), new File(tempProject.getAbsolutePath() + File.separator + "resources"));
+
+                    Zip.unzip(getClass().getResourceAsStream(RESOURCE_PATH), tempProject.getAbsolutePath() + File.separator + "resources");
 
                     transferTempFilesToProject(tempProject, virtualFile);
 
                     ProjectHelper.addRunConfiguration(project);
-
-
                 } catch (Exception e) {
                     Messages.showErrorDialog(project, e.getMessage(), "");
                 }

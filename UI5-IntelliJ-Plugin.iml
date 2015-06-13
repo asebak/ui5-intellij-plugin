@@ -8,11 +8,9 @@
       <sourceFolder url="file://$MODULE_DIR$/Resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
     </content>
-    <orderEntry type="jdk" jdkName="IDEA IU-139.1117.1" jdkType="IDEA JDK" />
+    <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="junit-4.11" level="project" />
-    <orderEntry type="library" name="junit-4.11 (2)" level="project" />
-    <orderEntry type="library" name="junit-4.11" level="project" />
-    <orderEntry type="library" name="zt-zip-1.8" level="project" />
+    <orderEntry type="library" name="freemarker" level="project" />
   </component>
 </module>
