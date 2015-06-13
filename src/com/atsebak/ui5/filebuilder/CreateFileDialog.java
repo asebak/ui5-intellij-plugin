@@ -5,6 +5,7 @@ import com.atsebak.ui5.autogeneration.UI5View;
 import com.atsebak.ui5.config.UI5Library;
 import com.atsebak.ui5.config.UI5Type;
 import com.atsebak.ui5.locale.UI5Bundle;
+import com.atsebak.ui5.util.ProjectHelper;
 import com.atsebak.ui5.util.UI5FileBuilder;
 import com.atsebak.ui5.util.Writer;
 import com.intellij.compiler.impl.CompilerUtil;
@@ -14,6 +15,9 @@ import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.ValidationInfo;
+import com.intellij.openapi.vfs.LocalFileSystem;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.newvfs.RefreshQueue;
 import com.intellij.psi.PsiDirectory;
 import lombok.SneakyThrows;
 import org.apache.commons.lang.StringUtils;
@@ -22,7 +26,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.io.File;
-import java.util.Arrays;
+import java.util.*;
 
 public class CreateFileDialog extends DialogWrapper {
     @NotNull
@@ -67,15 +71,12 @@ public class CreateFileDialog extends DialogWrapper {
                 if (type.equals(UI5Type.PROPERTIES)) {
                     File file = new File(contextPath + fileNameWithOutExt + ext);
                     Writer.writeToFile(file, "");
-                    CompilerUtil.refreshIODirectories(Arrays.asList(file));
+                    ProjectHelper.refreshAfterAdd(Arrays.asList(file));
                     return;
                 }
 
-                String newCreatedName = fileNameWithOutExt + ".view" + ext;
-                String viewPath = contextPath + newCreatedName;
-                String controllerPath = contextPath + fileNameWithOutExt + ".controller.js";
-                File controllerFile = new File(controllerPath);
-                File viewFile = new File(viewPath);
+                File controllerFile = new File(contextPath + fileNameWithOutExt + ".controller.js");
+                File viewFile = new File(contextPath + fileNameWithOutExt + ".view" + ext);
 
                 UI5View ui5View = UI5FileBuilder.getViewImplementation(type);
 
@@ -87,7 +88,7 @@ public class CreateFileDialog extends DialogWrapper {
                 Writer.writeToFile(controllerFile, controllerCode);
                 Writer.writeToFile(viewFile, viewCode);
 
-                CompilerUtil.refreshIODirectories(Arrays.asList(controllerFile, viewFile));
+                ProjectHelper.refreshAfterAdd(Arrays.asList(controllerFile, viewFile));
 
             }
         }, UI5Bundle.getString("file.adding"), false, project);

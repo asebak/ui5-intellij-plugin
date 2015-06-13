@@ -7,9 +7,21 @@ import com.intellij.execution.RunManager;
 import com.intellij.execution.RunnerAndConfigurationSettings;
 import com.intellij.ide.browsers.WebBrowserManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.LocalFileSystem;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.newvfs.RefreshQueue;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+
 public final class ProjectHelper {
+    /**
+     * Adds a run configuration to project
+     * @param project
+     */
     public static void addRunConfiguration(@NotNull final Project project) {
         final Runnable r = new Runnable() {
             @Override
@@ -27,5 +39,27 @@ public final class ProjectHelper {
             }
         };
         r.run();
+    }
+
+    /**
+     * Refereshs path after adding files
+     * @param files
+     */
+    public static void refreshAfterAdd(@NotNull Collection<File> files) {
+        LocalFileSystem lfs = LocalFileSystem.getInstance();
+        ArrayList filesToRefresh = new ArrayList();
+        Iterator iterator = files.iterator();
+
+        while (iterator.hasNext()) {
+            File file = (File) iterator.next();
+            VirtualFile virtualFile = lfs.refreshAndFindFileByIoFile(file);
+            if (virtualFile != null) {
+                filesToRefresh.add(virtualFile);
+            }
+        }
+
+        if (!filesToRefresh.isEmpty()) {
+            RefreshQueue.getInstance().refresh(false, true, null, filesToRefresh);
+        }
     }
 }
