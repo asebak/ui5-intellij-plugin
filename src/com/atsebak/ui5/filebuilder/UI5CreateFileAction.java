@@ -4,13 +4,14 @@ import com.intellij.ide.IdeView;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiDirectory;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Used for File Templates Creation
  */
 public class UI5CreateFileAction extends AnAction {
     @Override
-    public void actionPerformed(AnActionEvent anActionEvent) {
+    public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
         final DataContext dataContext = anActionEvent.getDataContext();
 
         final IdeView view = LangDataKeys.IDE_VIEW.getData(dataContext);

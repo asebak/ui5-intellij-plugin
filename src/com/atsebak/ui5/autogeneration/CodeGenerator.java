@@ -1,6 +1,6 @@
 package com.atsebak.ui5.autogeneration;
 
-import com.atsebak.ui5.config.UI5Library;
+import com.atsebak.ui5.AppType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -14,110 +14,93 @@ public final class CodeGenerator {
      * @return
      */
     public String createControllerCode(@NotNull final String root) {
-        return Template.builder().name("templates/controller.js.ftl").classContext(this.getClass())
-                .data(new HashMap<String, Object>() {{
-                    put("root", root);
-                }})
-                .build()
-                .toString();
+        return createTemplate("templates/controller.js.ftl", new HashMap<String, Object>() {{
+            put("root", root);
+        }});
     }
 
     /**
      * Index.html code
      *
-     * @param ui5Library
+     * @param appType
      * @param rootModuleName
      * @param intialViewExt
      * @return
      */
-    public String createIndexCode(@NotNull UI5Library ui5Library, @NotNull final String rootModuleName, @NotNull final String intialViewExt) {
-        String templateLocation = "";
-        switch (ui5Library) {
-            case DESKTOP:
-                templateLocation = "templates/desktop/index.html.ftl";
-                break;
-            case MOBILE:
-                templateLocation = "templates/mobile/index.html.ftl";
-                break;
-        }
-
-        return Template.builder().name(templateLocation).classContext(this.getClass())
-                .data(new HashMap<String, Object>() {{
-                    put("rootModuleName", rootModuleName);
-                    put("intialViewExt", intialViewExt.toUpperCase());
-                }})
-                .build()
-                .toString();
+    public String createIndexCode(@NotNull AppType appType, @NotNull final String rootModuleName, @NotNull final String intialViewExt) {
+        return createTemplate("templates/" + appType.name().toLowerCase() + "/index.html.ftl", new HashMap<String, Object>() {{
+            put("rootModuleName", rootModuleName);
+            put("intialViewExt", intialViewExt.toUpperCase());
+        }});
     }
 
     /**
      * HTML Code
      *
-     * @param ui5Library
+     * @param appType
      * @param controllerPath
      * @return
      */
-    public String createHtmlViewCode(@NotNull UI5Library ui5Library, @NotNull String controllerPath) {
-        return getGeneratedCodeForView(ui5Library, controllerPath, "html");
+    public String createHtmlViewCode(@NotNull AppType appType, @NotNull String controllerPath) {
+        return getGeneratedCodeForView(appType, controllerPath, "html");
     }
 
     /**
      * JS Code
      *
-     * @param ui5Library
+     * @param appType
      * @param controllerPath
      * @return
      */
-    public String createJavascriptViewCode(@NotNull UI5Library ui5Library, @NotNull String controllerPath){
-        return getGeneratedCodeForView(ui5Library, controllerPath, "js");
+    public String createJavascriptViewCode(@NotNull AppType appType, @NotNull String controllerPath){
+        return getGeneratedCodeForView(appType, controllerPath, "js");
     }
 
     /**
      * XML Code
      *
-     * @param ui5Library
+     * @param appType
      * @param controllerPath
      * @return
      */
-    public String createXmlViewCode(@NotNull UI5Library ui5Library, @NotNull String controllerPath) {
-        return getGeneratedCodeForView(ui5Library, controllerPath, "xml");
+    public String createXmlViewCode(@NotNull AppType appType, @NotNull String controllerPath) {
+        return getGeneratedCodeForView(appType, controllerPath, "xml");
     }
 
     /**
      * JSON Code
      *
-     * @param ui5Library
+     * @param appType
      * @param controllerPath
      * @return
      */
-    public String createJsonViewCode(@NotNull UI5Library ui5Library,@NotNull String controllerPath) {
-        return getGeneratedCodeForView(ui5Library, controllerPath, "json");
+    public String createJsonViewCode(@NotNull AppType appType,@NotNull String controllerPath) {
+        return getGeneratedCodeForView(appType, controllerPath, "json");
     }
 
     /**
      * Generic method to autogenerate code based on file template extension
      *
-     * @param ui5Library
+     * @param appType
      * @param controllerPath
      * @param ext
      * @return
      */
-    private String getGeneratedCodeForView(@NotNull UI5Library ui5Library, @NotNull final String controllerPath,@NotNull String ext) {
-        String templateLocation = "";
-        switch (ui5Library) {
-            case DESKTOP:
-                templateLocation = "templates/desktop/view." + ext + ".ftl";
-                break;
-            case MOBILE:
-                templateLocation = "templates/mobile/view." + ext + ".ftl";
-                break;
-        }
+    private String getGeneratedCodeForView(@NotNull AppType appType, @NotNull final String controllerPath,@NotNull String ext) {
+        return createTemplate("templates/" + appType.name().toLowerCase() + "/view." + ext + ".ftl", new HashMap<String, Object>() {{
+            put("controllerPath", controllerPath);
+        }});
+    }
 
-        return Template.builder().name(templateLocation).classContext(this.getClass())
-                .data(new HashMap<String, Object>() {{
-                    put("controllerPath", controllerPath);
-                }})
-                .build()
+    /**
+     * Template Builder class
+     * @param templateName
+     * @param replacements
+     * @return
+     */
+    private String createTemplate(String templateName, HashMap<String, Object> replacements) {
+        return Template.builder().name(templateName).classContext(this.getClass())
+                .data(replacements).build()
                 .toString();
     }
 }

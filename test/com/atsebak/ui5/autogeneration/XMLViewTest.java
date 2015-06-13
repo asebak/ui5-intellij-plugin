@@ -1,7 +1,7 @@
 package com.atsebak.ui5.autogeneration;
 
 
-import com.atsebak.ui5.config.UI5Library;
+import com.atsebak.ui5.AppType;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
@@ -18,14 +18,14 @@ public class XMLViewTest {
     @Test
     public void testAutogenerateCodeForDesktop() {
         UI5View view = new XMLView();
-        String s = view.autogenerateCode(UI5Library.DESKTOP, "com.atsebak");
+        String s = view.autogenerateCode(AppType.DESKTOP, "com.atsebak");
         assertThat(s.contains("<core:View xmlns:core=\"sap.ui.core\" xmlns=\"sap.ui.commons\" controllerName='com.atsebak'>"), is(true));
     }
 
     @Test
     public void testAutogenerateCodeForMobile() {
         UI5View view = new XMLView();
-        String s = view.autogenerateCode(UI5Library.MOBILE, "com.atsebak");
+        String s = view.autogenerateCode(AppType.MOBILE, "com.atsebak");
         assertThat(s.contains("<core:View xmlns:core=\"sap.ui.core\" xmlns=\"sap.m\" controllerName='com.atsebak'>"), is(true));
         assertThat(s.contains("<Page title=\"Title\">"), is(true));
     }

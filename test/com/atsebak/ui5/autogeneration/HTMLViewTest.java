@@ -1,6 +1,6 @@
 package com.atsebak.ui5.autogeneration;
 
-import com.atsebak.ui5.config.UI5Library;
+import com.atsebak.ui5.AppType;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
@@ -18,14 +18,14 @@ public class HTMLViewTest {
     @Test
     public void testAutogenerateCodeForDesktop() {
         UI5View htmlView = new HTMLView();
-        String s = htmlView.autogenerateCode(UI5Library.DESKTOP, "com.atsebak");
+        String s = htmlView.autogenerateCode(AppType.DESKTOP, "com.atsebak");
         assertThat(s.contains("<template data-controller-name='com.atsebak'"), is(true));
     }
 
     @Test
     public void testAutogenerateCodeForMobile() {
         UI5View htmlView = new HTMLView();
-        String s = htmlView.autogenerateCode(UI5Library.MOBILE, "com.atsebak");
+        String s = htmlView.autogenerateCode(AppType.MOBILE, "com.atsebak");
         assertThat(s.contains("<template data-controller-name='com.atsebak'"), is(true));
         assertThat(s.contains("<div data-sap-ui-type='sap.m.Page' data-title='Title'>"), is(true));
     }
