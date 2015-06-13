@@ -1,7 +1,7 @@
 package com.atsebak.ui5.projectbuilder;
 
 
-import com.atsebak.ui5.config.UI5Library;
+import com.atsebak.ui5.AppType;
 import com.atsebak.ui5.locale.UI5Bundle;
 import com.intellij.icons.AllIcons;
 import com.intellij.openapi.module.Module;
@@ -33,7 +33,7 @@ public class DesktopTemplateGenerator extends UI5ProjectTemplateGenerator {
 
     @Override
     public void generateProject(@NotNull Project project, @NotNull VirtualFile virtualFile, @NotNull UI5ProjectSettings settings, @NotNull Module module) {
-        settings.setLibrary(UI5Library.DESKTOP);
+        settings.setLibrary(AppType.DESKTOP);
         super.generateProject(project, virtualFile, settings, module);
     }
 }

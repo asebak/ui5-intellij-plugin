@@ -7,33 +7,39 @@ import com.intellij.execution.configurations.ConfigurationType;
 import com.intellij.execution.configurations.ConfigurationTypeUtil;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.openapi.project.Project;
+import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 
+@Getter
 public class UI5RunConfigurationType implements ConfigurationType {
-    private ConfigurationFactory configurationFactory;
+    private ConfigurationFactory factory;
 
     public UI5RunConfigurationType() {
-        configurationFactory = new ConfigurationFactory(this) {
+        factory = new ConfigurationFactory(this) {
             public RunConfiguration createTemplateConfiguration(Project project) {
                 return new UI5RunConfiguration(project, this, "OpenUI5");
             }
         };
     }
 
+    @NotNull
     public static UI5RunConfigurationType getInstance() {
         return ConfigurationTypeUtil.findConfigurationType(UI5RunConfigurationType.class);
     }
 
+    @Override
     public String getDisplayName() {
         return "Open UI5";
     }
 
+    @Override
     public String getConfigurationTypeDescription() {
         return UI5Bundle.getString("run.app");
     }
 
+    @Override
     public Icon getIcon() {
         return UI5Icons.getIcon();
     }
@@ -43,11 +49,8 @@ public class UI5RunConfigurationType implements ConfigurationType {
         return getConfigurationTypeDescription();
     }
 
+    @Override
     public ConfigurationFactory[] getConfigurationFactories() {
-        return new ConfigurationFactory[]{configurationFactory};
-    }
-
-    public ConfigurationFactory getFactory() {
-        return configurationFactory;
+        return new ConfigurationFactory[]{factory};
     }
 }

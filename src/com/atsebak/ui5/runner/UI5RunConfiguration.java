@@ -28,14 +28,10 @@ public class UI5RunConfiguration extends RunConfigurationBase {
         return new UI5RunConfigurationEditor();
     }
 
-    protected UI5RunnerParameters createRunnerParametersInstance() {
-        return new UI5RunnerParameters();
-    }
-
     @Override
     public void readExternal(Element element) throws InvalidDataException {
         super.readExternal(element);
-        runnerParameters = createRunnerParametersInstance();
+        runnerParameters = new UI5RunnerParameters();
         XmlSerializer.deserializeInto(runnerParameters, element);
     }
 
@@ -54,6 +50,7 @@ public class UI5RunConfiguration extends RunConfigurationBase {
 
     @Override
     public void checkConfiguration() throws RuntimeConfigurationException {
+
     }
 
 }

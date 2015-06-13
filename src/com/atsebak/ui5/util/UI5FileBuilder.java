@@ -1,8 +1,8 @@
 package com.atsebak.ui5.util;
 
 
+import com.atsebak.ui5.FileType;
 import com.atsebak.ui5.autogeneration.*;
-import com.atsebak.ui5.config.UI5Type;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.psi.PsiDirectory;
@@ -66,7 +66,7 @@ public final class UI5FileBuilder {
      * @param type
      * @return
      */
-    public static UI5View getViewImplementation(@NotNull UI5Type type) {
+    public static UI5View getViewImplementation(@NotNull FileType type) {
         switch (type) {
             case JS:
                 return new JSView();

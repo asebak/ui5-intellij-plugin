@@ -1,6 +1,6 @@
 package com.atsebak.ui5.autogeneration;
 
-import com.atsebak.ui5.config.UI5Library;
+import com.atsebak.ui5.AppType;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
@@ -18,7 +18,7 @@ public class JSONViewTest {
     @Test
     public void testAutogenerateCodeForDesktop() {
         UI5View view = new JSONView();
-        String s = view.autogenerateCode(UI5Library.DESKTOP, "com.atsebak");
+        String s = view.autogenerateCode(AppType.DESKTOP, "com.atsebak");
         assertThat(s.contains("\"Type\": \"sap.ui.core.mvc.JSONView\","), is(true));
         assertThat(s.contains("\"controllerName\": \"com.atsebak\","), is(true));
     }
@@ -26,7 +26,7 @@ public class JSONViewTest {
     @Test
     public void testAutogenerateCodeForMobile() {
         UI5View view = new JSONView();
-        String s = view.autogenerateCode(UI5Library.MOBILE, "com.atsebak");
+        String s = view.autogenerateCode(AppType.MOBILE, "com.atsebak");
         assertThat(s.contains("\"Type\": \"sap.ui.core.mvc.JSONView\","), is(true));
         assertThat(s.contains("\"controllerName\": \"com.atsebak\","), is(true));
         assertThat(s.contains("\"Type\": \"sap.m.Page\","), is(true));

@@ -1,6 +1,6 @@
 package com.atsebak.ui5.autogeneration;
 
-import com.atsebak.ui5.config.UI5Library;
+import com.atsebak.ui5.AppType;
 import org.jetbrains.annotations.NotNull;
 
 public class HTMLView extends View implements UI5View {
@@ -11,7 +11,7 @@ public class HTMLView extends View implements UI5View {
 
     @NotNull
     @Override
-    public String autogenerateCode(@NotNull UI5Library ui5Library, @NotNull String controllerPath) {
+    public String autogenerateCode(@NotNull AppType ui5Library, @NotNull String controllerPath) {
         return getCodeGenerator().createHtmlViewCode(ui5Library, controllerPath);
     }
 

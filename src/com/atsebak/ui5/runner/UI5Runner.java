@@ -43,6 +43,11 @@ public class UI5Runner extends DefaultProgramRunner {
         return DefaultRunExecutor.EXECUTOR_ID.equals(executorId) && (profile instanceof UI5RunConfiguration);
     }
 
+    /**
+     * Gets the path to browse relative to the html file
+     * @param project
+     * @return
+     */
     private String getClientApplicationPath(@NotNull Project project) {
         VirtualFile[] children = project.getBaseDir().getChildren();
         String browsePath = "/" + project.getName() + "/";

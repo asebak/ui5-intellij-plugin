@@ -1,6 +1,6 @@
-package com.atsebak.ui5.config;
+package com.atsebak.ui5;
 
-public enum UI5Type {
+public enum FileType {
     JS,
     XML,
     HTML,

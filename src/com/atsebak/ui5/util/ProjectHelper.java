@@ -18,6 +18,10 @@ import java.util.Collection;
 import java.util.Iterator;
 
 public final class ProjectHelper {
+
+    private ProjectHelper() {
+
+    }
     /**
      * Adds a run configuration to project
      * @param project

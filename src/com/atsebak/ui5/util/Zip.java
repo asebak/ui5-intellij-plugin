@@ -8,7 +8,11 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 
-public class Zip {
+public final class Zip {
+
+    private Zip() {
+
+    }
 
     /**
      * Unzip input stream to directory

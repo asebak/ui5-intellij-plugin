@@ -1,9 +1,9 @@
 package com.atsebak.ui5.projectbuilder;
 
+import com.atsebak.ui5.AppType;
 import com.atsebak.ui5.autogeneration.Controller;
 import com.atsebak.ui5.autogeneration.Index;
 import com.atsebak.ui5.autogeneration.UI5View;
-import com.atsebak.ui5.config.UI5Library;
 import com.atsebak.ui5.locale.UI5Bundle;
 import com.atsebak.ui5.util.*;
 import com.intellij.ide.util.projectWizard.WebProjectTemplate;
@@ -11,10 +11,10 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import lombok.Data;
+import lombok.SneakyThrows;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -44,39 +44,46 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
     @Override
     public void generateProject(@NotNull final Project project, @NotNull final VirtualFile virtualFile, @NotNull final UI5ProjectSettings settings, @NotNull Module module) {
         if(settings.getLibrary() == null) {
-            settings.setLibrary(UI5Library.DESKTOP);
+            settings.setLibrary(AppType.DESKTOP);
         }
         final Index index = new Index();
         final String ext = settings.getView().getExtension();
 
+
         ProgressManager.getInstance().runProcessWithProgressSynchronously(new Runnable() {
+            @SneakyThrows(Exception.class)
             @Override
             public void run() {
-                final ProgressIndicator progressIndicator =  ProgressManager.getInstance().getProgressIndicator();
+                final ProgressIndicator progressIndicator = ProgressManager.getInstance().getProgressIndicator();
                 progressIndicator.setText(UI5Bundle.getString("app.creating.long"));
+
+                /*Code generation*/
+
                 String rootName = virtualFile.getNameWithoutExtension().toLowerCase().replace(" ", "");
                 String indexHtml = index.createIndexCode(settings.getLibrary(), rootName, ext);
-                try {
-                    File tempProject = createTemp();
-                    String mainView = settings.getView().autogenerateCode(settings.getLibrary(), rootName + ".Main");
-                    createPaths(tempProject, new String[]{"i18n", "css", "util", rootName, "resources"});
-                    String mainController = new Controller().getAutogenerateCode(rootName, "Main");
 
-                    writeToFile(tempProject, "", "Index.html", indexHtml);
-                    writeToFile(tempProject, rootName, "Main.view." + ext, mainView);
-                    writeToFile(tempProject, rootName, "Main.controller.js", mainController);
-                    writeToFile(tempProject, "css", rootName + ".css", "");
-                    writeToFile(tempProject, "i18n", "i18n.properties", "");
+                String mainView = settings.getView().autogenerateCode(settings.getLibrary(), rootName + ".Main");
+                String mainController = new Controller().getAutogenerateCode(rootName, "Main");
 
+                /*File Creation*/
 
-                    Zip.unzip(getClass().getResourceAsStream(RESOURCE_PATH), tempProject.getAbsolutePath() + File.separator + "resources");
+                File tempProject = createTemp();
 
-                    transferTempFilesToProject(tempProject, virtualFile);
+                createPaths(tempProject, new String[]{"i18n", "css", "util", rootName, "resources"});
 
-                    ProjectHelper.addRunConfiguration(project);
-                } catch (Exception e) {
-                    Messages.showErrorDialog(project, e.getMessage(), "");
-                }
+                writeToFile(tempProject, "", "Index.html", indexHtml);
+                writeToFile(tempProject, rootName, "Main.view." + ext, mainView);
+                writeToFile(tempProject, rootName, "Main.controller.js", mainController);
+                writeToFile(tempProject, "css", rootName + ".css", "");
+                writeToFile(tempProject, "i18n", "i18n.properties", "");
+
+                /*Unzip UI5 Resources to temp project*/
+
+                Zip.unzip(getClass().getResourceAsStream(RESOURCE_PATH), tempProject.getAbsolutePath() + File.separator + "resources");
+
+                transferTempFilesToProject(tempProject, virtualFile);
+
+                ProjectHelper.addRunConfiguration(project);
             }
         }, UI5Bundle.getString("project.creating"), false, project);
     }
@@ -121,7 +128,7 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
     @Data
     final static class UI5ProjectSettings {
         private UI5View view;
-        private UI5Library library;
+        private AppType library;
     }
 
 }

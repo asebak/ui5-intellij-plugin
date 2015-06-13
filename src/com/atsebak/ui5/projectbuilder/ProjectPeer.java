@@ -1,7 +1,7 @@
 package com.atsebak.ui5.projectbuilder;
 
+import com.atsebak.ui5.FileType;
 import com.atsebak.ui5.autogeneration.UI5View;
-import com.atsebak.ui5.config.UI5Type;
 import com.atsebak.ui5.locale.UI5Bundle;
 import com.atsebak.ui5.util.UI5FileBuilder;
 import com.intellij.ide.util.projectWizard.SettingsStep;
@@ -48,7 +48,7 @@ public class ProjectPeer implements WebProjectGenerator.GeneratorPeer<UI5Project
     public UI5ProjectTemplateGenerator.UI5ProjectSettings getSettings() {
 
         String viewType = getSelectedButton(viewTypeButtonGroup);
-        UI5View view = UI5FileBuilder.getViewImplementation(UI5Type.valueOf(viewType));
+        UI5View view = UI5FileBuilder.getViewImplementation(FileType.valueOf(viewType));
 
         settings.setView(view);
 
