@@ -35,47 +35,14 @@ public final class CodeGenerator {
     }
 
     /**
-     * HTML Code
-     *
+     * Creates the view code
      * @param appType
      * @param controllerPath
+     * @param ext
      * @return
      */
-    public String createHtmlViewCode(@NotNull AppType appType, @NotNull String controllerPath) {
-        return getGeneratedCodeForView(appType, controllerPath, "html");
-    }
-
-    /**
-     * JS Code
-     *
-     * @param appType
-     * @param controllerPath
-     * @return
-     */
-    public String createJavascriptViewCode(@NotNull AppType appType, @NotNull String controllerPath){
-        return getGeneratedCodeForView(appType, controllerPath, "js");
-    }
-
-    /**
-     * XML Code
-     *
-     * @param appType
-     * @param controllerPath
-     * @return
-     */
-    public String createXmlViewCode(@NotNull AppType appType, @NotNull String controllerPath) {
-        return getGeneratedCodeForView(appType, controllerPath, "xml");
-    }
-
-    /**
-     * JSON Code
-     *
-     * @param appType
-     * @param controllerPath
-     * @return
-     */
-    public String createJsonViewCode(@NotNull AppType appType,@NotNull String controllerPath) {
-        return getGeneratedCodeForView(appType, controllerPath, "json");
+    public String createViewCode(@NotNull AppType appType, @NotNull String controllerPath, @NotNull String ext){
+        return getGeneratedCodeForView(appType, controllerPath, ext);
     }
 
     /**

@@ -48,7 +48,7 @@ public final class Zip {
      * @param filePath
      * @throws IOException
      */
-    private static void extractFile(ZipInputStream zipIn, String filePath) throws IOException {
+    private static void extractFile(@NotNull ZipInputStream zipIn,@NotNull String filePath) throws IOException {
         BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(filePath));
         byte[] bytesIn = new byte[4096];
         int read = 0;

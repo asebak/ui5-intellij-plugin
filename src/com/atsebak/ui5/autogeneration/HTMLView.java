@@ -12,7 +12,7 @@ public class HTMLView extends View implements UI5View {
     @NotNull
     @Override
     public String autogenerateCode(@NotNull AppType ui5Library, @NotNull String controllerPath) {
-        return getCodeGenerator().createHtmlViewCode(ui5Library, controllerPath);
+        return getCodeGenerator().createViewCode(ui5Library, controllerPath, getExtension());
     }
 
 }
