@@ -5,9 +5,8 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.powermock.reflect.Whitebox;
 
-import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.*;
-
+import static org.junit.matchers.JUnitMatchers.containsString;
 
 public class UI5RunnerTest {
 
