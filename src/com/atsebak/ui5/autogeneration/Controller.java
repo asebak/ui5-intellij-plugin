@@ -2,8 +2,7 @@ package com.atsebak.ui5.autogeneration;
 
 import org.jetbrains.annotations.NotNull;
 
-public class Controller extends View {
-
+public class Controller extends UI5View {
     /**
      * generates code for the controller
      *

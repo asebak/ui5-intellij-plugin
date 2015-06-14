@@ -17,7 +17,7 @@ public class JSViewTest {
     @Test
     public void testAutogenerateCodeForDesktop() {
         UI5View view = new JSView();
-        String s = view.autogenerateCode(AppType.DESKTOP, "com.atsebak");
+        String s = view.generateCode(AppType.DESKTOP, "com.atsebak");
         assertThat(s.contains("sap.ui.jsview('com.atsebak'"), is(true));
         assertThat(s.contains("return 'com.atsebak'"), is(true));
     }
@@ -25,7 +25,7 @@ public class JSViewTest {
     @Test
     public void testAutogenerateCodeForMobile() {
         UI5View view = new JSView();
-        String s = view.autogenerateCode(AppType.MOBILE, "com.atsebak");
+        String s = view.generateCode(AppType.MOBILE, "com.atsebak");
         assertThat(s.contains("ap.ui.jsview('com.atsebak',"), is(true));
         assertThat(s.contains("return new sap.m.Page"), is(true));
     }

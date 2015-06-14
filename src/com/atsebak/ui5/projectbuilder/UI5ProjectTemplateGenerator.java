@@ -62,7 +62,7 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
                 String rootName = virtualFile.getNameWithoutExtension().toLowerCase().replace(" ", "");
                 String indexHtml = index.createIndexCode(settings.getLibrary(), rootName, ext);
 
-                String mainView = settings.getView().autogenerateCode(settings.getLibrary(), rootName + ".Main");
+                String mainView = settings.getView().generateCode(settings.getLibrary(), rootName + ".Main");
                 String mainController = new Controller().getAutogenerateCode(rootName, "Main");
 
                 /*File Creation*/

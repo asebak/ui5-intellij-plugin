@@ -69,15 +69,15 @@ public class CreateFileDialog extends DialogWrapper {
                     return;
                 }
 
-                File controllerFile = new File(contextPath + fileNameWithOutExt + ".controller.js");
-                File viewFile = new File(contextPath + fileNameWithOutExt + ".view" + ext);
-
                 UI5View ui5View = UI5FileBuilder.getViewImplementation(type);
 
                 String modulePath = UI5FileBuilder.getModulePath(psiDirectory);
 
-                String viewCode = ui5View.autogenerateCode(AppType.DESKTOP, modulePath + "." + fileNameWithOutExt);
+                String viewCode = ui5View.generateCode(AppType.DESKTOP, modulePath + "." + fileNameWithOutExt);
                 String controllerCode = new Controller().getAutogenerateCode(modulePath, fileNameWithOutExt);
+
+                File controllerFile = new File(contextPath + fileNameWithOutExt + ".controller.js");
+                File viewFile = new File(contextPath + fileNameWithOutExt + ".view" + ext);
 
                 Writer.writeToFile(controllerFile, controllerCode);
                 Writer.writeToFile(viewFile, viewCode);
