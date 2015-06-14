@@ -77,7 +77,7 @@ public class ProjectPeer implements WebProjectGenerator.GeneratorPeer<UI5Project
      * @param buttonGroup
      * @return
      */
-    public String getSelectedButton(@NotNull ButtonGroup buttonGroup) {
+    private String getSelectedButton(@NotNull ButtonGroup buttonGroup) {
         for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements(); ) {
             AbstractButton button = buttons.nextElement();
 
