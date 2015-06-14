@@ -6,14 +6,13 @@ import org.mockito.Mockito;
 import org.powermock.reflect.Whitebox;
 
 import static org.junit.Assert.*;
-import static org.junit.matchers.JUnitMatchers.containsString;
 
 public class UI5RunnerTest {
 
     @Test
     public void testGetRunnerId() throws Exception {
         UI5Runner runner = new UI5Runner();
-        assertThat(runner.getRunnerId(), containsString("UI5"));
+        assertEquals(runner.getRunnerId(), "OpenUI5Runner");
     }
 
     @Test
