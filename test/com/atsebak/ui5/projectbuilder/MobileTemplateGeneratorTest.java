@@ -9,7 +9,7 @@ public class MobileTemplateGeneratorTest {
 
     @Test
     public void testGetName() {
-        DesktopTemplateGenerator templateGenerator = Whitebox.newInstance(DesktopTemplateGenerator.class);
+        MobileTemplateGenerator templateGenerator = Whitebox.newInstance(MobileTemplateGenerator.class);
         assertTrue(templateGenerator.getName().contains("Mobile"));
     }
 }
