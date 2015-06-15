@@ -9,11 +9,13 @@ import java.lang.ref.Reference;
 import java.lang.ref.SoftReference;
 import java.util.ResourceBundle;
 
-public class UI5Bundle {
+import static com.intellij.reference.SoftReference.dereference;
+
+public final class UI5Bundle {
 
     @NonNls
     private static final String BUNDLE = "com.atsebak.ui5.locale.UI5Bundle";
-    private static Reference<ResourceBundle> ourBundle;
+    private static Reference<ResourceBundle> bundleReference;
 
     /**
      * Private Constructor
@@ -34,10 +36,10 @@ public class UI5Bundle {
      * @return
      */
     private static ResourceBundle getBundle() {
-        ResourceBundle bundle = com.intellij.reference.SoftReference.dereference(ourBundle);
+        ResourceBundle bundle = dereference(bundleReference);
         if (bundle == null) {
             bundle = ResourceBundle.getBundle(BUNDLE);
-            ourBundle = new SoftReference<ResourceBundle>(bundle);
+            bundleReference = new SoftReference<ResourceBundle>(bundle);
         }
         return bundle;
     }

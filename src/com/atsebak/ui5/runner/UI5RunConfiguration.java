@@ -7,11 +7,7 @@ import com.intellij.execution.configurations.*;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.InvalidDataException;
-import com.intellij.openapi.util.WriteExternalException;
-import com.intellij.util.xmlb.XmlSerializer;
 import lombok.Getter;
-import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 
 @Getter
@@ -26,21 +22,6 @@ public class UI5RunConfiguration extends RunConfigurationBase {
     @Override
     public SettingsEditor<? extends RunConfiguration> getConfigurationEditor() {
         return new UI5RunConfigurationEditor();
-    }
-
-    @Override
-    public void readExternal(Element element) throws InvalidDataException {
-        super.readExternal(element);
-        runnerParameters = new UI5RunnerParameters();
-        XmlSerializer.deserializeInto(runnerParameters, element);
-    }
-
-    @Override
-    public void writeExternal(Element element) throws WriteExternalException {
-        super.writeExternal(element);
-        if (runnerParameters != null) {
-            XmlSerializer.serializeInto(runnerParameters, element);
-        }
     }
 
     @Override
