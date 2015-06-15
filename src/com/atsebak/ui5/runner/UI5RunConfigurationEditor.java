@@ -19,14 +19,14 @@ public class UI5RunConfigurationEditor extends SettingsEditor<UI5RunConfiguratio
     }
 
     @Override
-    protected void resetEditorFrom(UI5RunConfiguration s) {
-        UI5RunnerParameters params = s.getRunnerParameters();
+    protected void resetEditorFrom(@NotNull UI5RunConfiguration runConfiguration) {
+        UI5RunnerParameters params = runConfiguration.getRunnerParameters();
         myBrowserSelector.setSelected(params.getWebBrowser() != null ? params.getWebBrowser() : null);
     }
 
     @Override
-    protected void applyEditorTo(UI5RunConfiguration s) throws ConfigurationException {
-        UI5RunnerParameters params = s.getRunnerParameters();
+    protected void applyEditorTo(@NotNull UI5RunConfiguration runConfiguration) throws ConfigurationException {
+        UI5RunnerParameters params = runConfiguration.getRunnerParameters();
         params.setWebBrowser(myBrowserSelector.getSelected());
     }
 
