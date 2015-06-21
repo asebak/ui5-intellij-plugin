@@ -17,10 +17,7 @@ $ sudo sh ./ci-build.sh
 ```
 
 ##### Extension Overview
-```
-This extension allows support for creating SAP UI5 Apps
-that can run inside of IDEA products (Intellij, Webstorm, etc).
-```
+This extension allows support for creating SAP UI5 Apps that can run inside of IDEA products (Intellij, Webstorm, etc).
 
 ##### Features
 ```
