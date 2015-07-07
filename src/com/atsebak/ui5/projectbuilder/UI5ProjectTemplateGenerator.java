@@ -1,11 +1,13 @@
 package com.atsebak.ui5.projectbuilder;
 
 import com.atsebak.ui5.AppType;
+import com.atsebak.ui5.FileType;
 import com.atsebak.ui5.autogeneration.Controller;
 import com.atsebak.ui5.autogeneration.Index;
 import com.atsebak.ui5.autogeneration.UI5View;
 import com.atsebak.ui5.locale.UI5Bundle;
 import com.atsebak.ui5.util.*;
+import com.atsebak.ui5.util.Writer;
 import com.intellij.ide.util.projectWizard.WebProjectTemplate;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.progress.ProgressIndicator;
@@ -20,15 +22,15 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * This is for the sub template of the project.
  * Once the finished but is click generateProject method is called and runs a seperate process
  */
 public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTemplateGenerator.UI5ProjectSettings> {
-    private static final String RESOURCE_PATH = "/ui5/resources.zip";
+    private static final String UI5_RESOURCE_PATH = "/ui5/";
+    private static final String RESOURCE_PATH = UI5_RESOURCE_PATH + "resources.zip";
     @Nls
     @NotNull
     @Override
@@ -47,7 +49,9 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
             settings.setLibrary(AppType.DESKTOP);
         }
         final Index index = new Index();
-        final String ext = settings.getView().getExtension();
+        final UI5View view = settings.getView();
+        final AppType type = settings.getLibrary();
+        final String ext = view.getExtension();
 
 
         ProgressManager.getInstance().runProcessWithProgressSynchronously(new Runnable() {
@@ -60,16 +64,21 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
                 /*Code generation*/
 
                 String rootName = virtualFile.getNameWithoutExtension().toLowerCase().replace(" ", "");
-                String indexHtml = index.createIndexCode(settings.getLibrary(), rootName, ext);
+                String indexHtml = index.createIndexCode(type, rootName, ext);
 
-                String mainView = settings.getView().generateCode(settings.getLibrary(), rootName + ".Main");
+                String mainView = view.generateCode(type, rootName + ".Main");
                 String mainController = new Controller().getAutogenerateCode(rootName, "Main");
 
                 /*File Creation*/
 
                 File tempProject = createTemp();
 
+
                 createPaths(tempProject, new String[]{"i18n", "css", "util", rootName, "resources"});
+
+                if(ext.toUpperCase().equals(FileType.XML.name())) {
+                    UI5FileBuilder.createDirectoryFromName(tempProject, "xsd");
+                }
 
                 writeToFile(tempProject, "", "Index.html", indexHtml);
                 writeToFile(tempProject, rootName, "Main.view." + ext, mainView);
@@ -80,6 +89,17 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
                 /*Unzip UI5 Resources to temp project*/
 
                 Zip.unzip(getClass().getResourceAsStream(RESOURCE_PATH), tempProject.getAbsolutePath() + File.separator + "resources");
+
+                /*Add XSD Schemas if XML based project*/
+
+                if(ext.toUpperCase().equals(FileType.XML.name())) {
+                    writeToFile(tempProject, "xsd", "sap.ui.core.xsd", getClass().getResourceAsStream(UI5_RESOURCE_PATH + "sap.ui.core.xsd"));
+                    if (type.equals(AppType.MOBILE)) {
+                        writeToFile(tempProject, "xsd", "sap.m.xsd", getClass().getResourceAsStream(UI5_RESOURCE_PATH + "sap.m.xsd"));
+                    } else if (type.equals(AppType.DESKTOP)) {
+                        writeToFile(tempProject, "xsd", "sap.ui.commons.xsd", getClass().getResourceAsStream(UI5_RESOURCE_PATH + "sap.ui.commons.xsd"));
+                    }
+                }
 
                 transferTempFilesToProject(tempProject, virtualFile);
 
@@ -116,6 +136,16 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
     private void writeToFile(@NotNull File tempProject, @Nullable String path, @NotNull String fileName, @Nullable String content) throws IOException {
         File file = new File(tempProject.getAbsolutePath() + File.separator + path + File.separator + fileName);
         Writer.writeToFile(file, content);
+    }
+
+    private void writeToFile(@NotNull File tempProject, @Nullable String path, @NotNull String fileName, @Nullable InputStream inputStream) throws IOException {
+        BufferedReader bufRead = new BufferedReader(new InputStreamReader(inputStream));
+        StringBuilder builder = new StringBuilder();
+        String line;
+        while((line=bufRead.readLine())!=null) {
+            builder.append(line).append("\n");
+        }
+        writeToFile(tempProject, path, fileName, builder.toString());
     }
 
     private void transferTempFilesToProject(@NotNull File tempProject, @NotNull VirtualFile virtualFile) throws IOException {
