@@ -4,7 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv='Content-Type' content='text/html;charset=UTF-8'/>
     <link rel="stylesheet" type="text/css" href="css/${rootModuleName}.css">
-    <script src="resources/sap-ui-core.js" id="sap-ui-bootstrap" data-sap-ui-libs="sap.ui.commons,sap.ui.table,sap.ui.ux3" data-sap-ui-theme="sap_goldreflection">
+    <script src="resources/sap-ui-core.js" id="sap-ui-bootstrap" data-sap-ui-language="en" data-sap-ui-libs="sap.ui.commons,sap.ui.table,sap.ui.ux3" data-sap-ui-theme="sap_goldreflection">
     </script>
     <script>
         sap.ui.localResources("${rootModuleName}");

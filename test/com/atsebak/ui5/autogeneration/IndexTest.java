@@ -14,7 +14,7 @@ public class IndexTest {
         Index index = new Index();
         String js = index.createIndexCode(AppType.DESKTOP, "atsebak", "js");
         assertTrue(js.contains("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/atsebak.css\">"));
-        assertTrue(js.contains("<script src=\"resources/sap-ui-core.js\" id=\"sap-ui-bootstrap\" data-sap-ui-libs=\"sap.ui.commons,sap.ui.table,sap.ui.ux3\" data-sap-ui-theme=\"sap_goldreflection\">"));
+        assertTrue(js.contains("<script src=\"resources/sap-ui-core.js\" id=\"sap-ui-bootstrap\" data-sap-ui-language=\"en\" data-sap-ui-libs=\"sap.ui.commons,sap.ui.table,sap.ui.ux3\" data-sap-ui-theme=\"sap_goldreflection\">"));
         assertTrue(js.contains("sap.ui.localResources(\"atsebak\");"));
         assertFalse(js.contains("sap.m.App"));
     }
@@ -64,7 +64,7 @@ public class IndexTest {
         Index index = new Index();
         String js = index.createIndexCode(AppType.MOBILE, "atsebak", "js");
         assertTrue(js.contains("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/atsebak.css\">"));
-        assertTrue(js.contains("<script src=\"resources/sap-ui-core.js\" id=\"sap-ui-bootstrap\" data-sap-ui-libs=\"sap.m\" data-sap-ui-theme=\"sap_bluecrystal\">"));
+        assertTrue(js.contains(" <script src=\"resources/sap-ui-core.js\" id=\"sap-ui-bootstrap\" data-sap-ui-language=\"en\" data-sap-ui-libs=\"sap.m\" data-sap-ui-theme=\"sap_bluecrystal\">"));
         assertTrue(js.contains("sap.ui.localResources(\"atsebak\");"));
         assertTrue(js.contains("sap.m.App"));
     }

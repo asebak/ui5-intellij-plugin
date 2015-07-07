@@ -26,7 +26,7 @@ import java.io.*;
 
 /**
  * This is for the sub template of the project.
- * Once the finished but is click generateProject method is called and runs a seperate process
+ * Once the finished but is click generateProject method is called and runs a separate process
  */
 public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTemplateGenerator.UI5ProjectSettings> {
     private static final String UI5_RESOURCE_PATH = "/ui5/";
@@ -45,7 +45,7 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
 
     @Override
     public void generateProject(@NotNull final Project project, @NotNull final VirtualFile virtualFile, @NotNull final UI5ProjectSettings settings, @NotNull Module module) {
-        if(settings.getLibrary() == null) {
+        if (settings.getLibrary() == null) {
             settings.setLibrary(AppType.DESKTOP);
         }
         final Index index = new Index();
@@ -76,7 +76,7 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
 
                 createPaths(tempProject, new String[]{"i18n", "css", "util", rootName, "resources"});
 
-                if(ext.toUpperCase().equals(FileType.XML.name())) {
+                if (ext.toUpperCase().equals(FileType.XML.name())) {
                     UI5FileBuilder.createDirectoryFromName(tempProject, "xsd");
                 }
 
@@ -92,29 +92,63 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
 
                 /*Add XSD Schemas if XML based project*/
 
-                if(ext.toUpperCase().equals(FileType.XML.name())) {
-                    writeToFile(tempProject, "xsd", "sap.ui.core.xsd", getClass().getResourceAsStream(UI5_RESOURCE_PATH + "sap.ui.core.xsd"));
-                    if (type.equals(AppType.MOBILE)) {
-                        writeToFile(tempProject, "xsd", "sap.m.xsd", getClass().getResourceAsStream(UI5_RESOURCE_PATH + "sap.m.xsd"));
-                    } else if (type.equals(AppType.DESKTOP)) {
-                        writeToFile(tempProject, "xsd", "sap.ui.commons.xsd", getClass().getResourceAsStream(UI5_RESOURCE_PATH + "sap.ui.commons.xsd"));
-                    }
-                }
+                addXsdSchemas(tempProject);
 
                 transferTempFilesToProject(tempProject, virtualFile);
 
                 ProjectHelper.addRunConfiguration(project);
             }
+
+            private void addXsdSchemas(@NotNull File tempProject) throws IOException {
+                if (ext.toUpperCase().equals(FileType.XML.name())) {
+                    writeToFile(tempProject, "xsd", "sap.ui.core.xsd", getClass().getResourceAsStream(UI5_RESOURCE_PATH + "sap.ui.core.xsd"));
+                    writeToFile(tempProject, "xsd", "sap.ui.commons.xsd", getClass().getResourceAsStream(UI5_RESOURCE_PATH + "sap.ui.commons.xsd"));
+                    writeToFile(tempProject, "xsd", "sap.ui.layout.xsd", getClass().getResourceAsStream(UI5_RESOURCE_PATH + "sap.ui.layout.xsd"));
+                    writeToFile(tempProject, "xsd", "sap.ui.table.xsd", getClass().getResourceAsStream(UI5_RESOURCE_PATH + "sap.ui.table.xsd"));
+                    writeToFile(tempProject, "xsd", "sap.ui.ux3.xsd", getClass().getResourceAsStream(UI5_RESOURCE_PATH + "sap.ui.table.xsd"));
+                    writeToFile(tempProject, "xsd", "sap.m.xsd", getClass().getResourceAsStream(UI5_RESOURCE_PATH + "sap.m.xsd"));
+                }
+            }
+
+            private void createPaths(@NotNull File tempDir, @NotNull String[] paths) {
+                for (int i = 0; i < paths.length; i++) {
+                    UI5FileBuilder.createDirectoryFromName(tempDir, paths[i]);
+                }
+            }
+
+            private void writeToFile(@NotNull File tempProject, @Nullable String path, @NotNull String fileName, @Nullable String content) throws IOException {
+                File file = new File(tempProject.getAbsolutePath() + File.separator + path + File.separator + fileName);
+                Writer.writeToFile(file, content);
+            }
+
+            private void writeToFile(@NotNull File tempProject, @Nullable String path, @NotNull String fileName, @Nullable InputStream inputStream) throws IOException {
+                BufferedReader bufRead = new BufferedReader(new InputStreamReader(inputStream));
+                StringBuilder builder = new StringBuilder();
+                String line;
+                while ((line = bufRead.readLine()) != null) {
+                    builder.append(line).append("\n");
+                }
+                writeToFile(tempProject, path, fileName, builder.toString());
+            }
+
+            private void transferTempFilesToProject(@NotNull File tempProject, @NotNull VirtualFile virtualFile) throws IOException {
+                File[] files = tempProject.listFiles();
+                assert files != null && files.length != 0;
+                FileUtil.copyDir(tempProject, new File(virtualFile.getPath()));
+                deleteTemp(tempProject);
+            }
+
+            private File createTemp() throws IOException {
+                return FileUtil.createTempDirectory("ui5-generated-project", null, false);
+            }
+
+            private void deleteTemp(@NotNull File tempProject) {
+                FileUtil.delete(tempProject);
+            }
+
         }, UI5Bundle.getString("project.creating"), false, project);
     }
 
-    private File createTemp() throws IOException {
-        return FileUtil.createTempDirectory("ui5-generated-project", null, false);
-    }
-
-    private void deleteTemp(@NotNull File tempProject) {
-        FileUtil.delete(tempProject);
-    }
 
     @Override
     public Icon getIcon() {
@@ -127,33 +161,6 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
         return new ProjectPeer();
     }
 
-    private void createPaths(@NotNull File tempDir, @NotNull String[] paths) {
-        for (int i = 0; i < paths.length; i++) {
-            UI5FileBuilder.createDirectoryFromName(tempDir, paths[i]);
-        }
-    }
-
-    private void writeToFile(@NotNull File tempProject, @Nullable String path, @NotNull String fileName, @Nullable String content) throws IOException {
-        File file = new File(tempProject.getAbsolutePath() + File.separator + path + File.separator + fileName);
-        Writer.writeToFile(file, content);
-    }
-
-    private void writeToFile(@NotNull File tempProject, @Nullable String path, @NotNull String fileName, @Nullable InputStream inputStream) throws IOException {
-        BufferedReader bufRead = new BufferedReader(new InputStreamReader(inputStream));
-        StringBuilder builder = new StringBuilder();
-        String line;
-        while((line=bufRead.readLine())!=null) {
-            builder.append(line).append("\n");
-        }
-        writeToFile(tempProject, path, fileName, builder.toString());
-    }
-
-    private void transferTempFilesToProject(@NotNull File tempProject, @NotNull VirtualFile virtualFile) throws IOException {
-        File[] files = tempProject.listFiles();
-        assert files != null && files.length != 0;
-        FileUtil.copyDir(tempProject, new File(virtualFile.getPath()));
-        deleteTemp(tempProject);
-    }
 
     @Data
     final static class UI5ProjectSettings {
