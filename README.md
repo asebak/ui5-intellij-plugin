@@ -24,9 +24,10 @@ This extension allows support for creating SAP UI5 Apps that can run inside of I
 - Desktop or Mobile Application project templates.
 - i18n Properties file template.
 - View Templates (XML, HTML, JSON, JS) file templates.
-- Run Configurations to run static web content without a java webserver.
+- Run Configurations to run static web content without a java webserver. (no need for web.xml configuration)
 - Api Documentation Searching
 - Autocomplete functionality based on static imported resources.
+- XSD Schema integration for XML Views.
 ```
 ![ScreenShot](https://raw.githubusercontent.com/asebak/UI5-IntelliJ-Plugin/master/Resources/diagrams/ui5app.png)
 ![ScreenShot](https://raw.githubusercontent.com/asebak/UI5-IntelliJ-Plugin/master/Resources/diagrams/ui5config.png)
