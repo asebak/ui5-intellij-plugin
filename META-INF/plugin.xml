@@ -12,6 +12,9 @@
     <b>Version 2.02</b>
     <ul>
         <li>
+            Added xsd to xml type projects for autocompletion for xml views.
+        </li>
+        <li>
             Added css file to html file generated.
         </li>
     </ul>
