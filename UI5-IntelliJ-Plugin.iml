@@ -13,5 +13,6 @@
     <orderEntry type="library" name="junit-4.11" level="project" />
     <orderEntry type="library" name="freemarker" level="project" />
     <orderEntry type="library" name="javassist-3.18.2-GA" level="project" />
+    <orderEntry type="library" name="freemarker" level="project" />
   </component>
 </module>
