@@ -80,7 +80,7 @@ public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTe
                     UI5FileBuilder.createDirectoryFromName(tempProject, "xsd");
                 }
 
-                writeToFile(tempProject, "", "Index.html", indexHtml);
+                writeToFile(tempProject, "", "index.html", indexHtml);
                 writeToFile(tempProject, rootName, "Main.view." + ext, mainView);
                 writeToFile(tempProject, rootName, "Main.controller.js", mainController);
                 writeToFile(tempProject, "css", rootName + ".css", "");
