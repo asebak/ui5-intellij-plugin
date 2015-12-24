@@ -1,5 +1,5 @@
 #!/bin/bash
-ideaVersion="14.1.5"
+ideaVersion="15.0.2"
 if [ ! -d ./idea-IC ]; then
 if [ -f ~/Tools/ideaIC-${ideaVersion}.tar.gz ];
 then
