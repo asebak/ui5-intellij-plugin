@@ -30,7 +30,7 @@ import java.io.*;
  */
 public class UI5ProjectTemplateGenerator extends WebProjectTemplate<UI5ProjectTemplateGenerator.UI5ProjectSettings> {
     private static final String UI5_RESOURCE_PATH = "/ui5/";
-    private static final String RESOURCE_PATH = "/" + "resources.zip";
+    private static final String RESOURCE_PATH = UI5_RESOURCE_PATH + "ui5/resources.zip";
     @Nls
     @NotNull
     @Override

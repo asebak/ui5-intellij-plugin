@@ -13,14 +13,12 @@ public class UI5ProjectTemplateGeneratorTest {
 
     @Test
     public void resourcesZipExistsTest() {
-        URL resource = getClass().getResource("/resources.zip");
-        assertTrue(resource != null);
+        assertTrue(getClass().getResource("/resources.zip") == null);
     }
 
     @Test
     public void resourcesZipDoesNotExistsTest() {
-        URL resource = getClass().getResource("/ui5/resources.zip");
-        assertTrue(resource == null);
+        assertTrue(getClass().getResource(UI5_RESOURCE_PATH + "resources.zip") != null);
     }
 
     @Test
